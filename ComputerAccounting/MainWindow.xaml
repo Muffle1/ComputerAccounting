@@ -22,6 +22,6 @@
     </Window.Resources>
     
     <Grid>
-        <ContentControl Content=""/>
+        <ContentControl Content=" "/>
     </Grid>
 </Window>
