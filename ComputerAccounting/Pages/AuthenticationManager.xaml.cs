@@ -1,6 +1,4 @@
-﻿using ComputerAccounting.Pages;
-using ComputerAccounting.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -10,20 +8,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ComputerAccounting
+namespace ComputerAccounting.Pages
 {
-
     /// <summary>
-    /// Логика взаимодействия для PageManager.xaml
+    /// Логика взаимодействия для AuthenticationManager.xaml
     /// </summary>
-    public partial class PageManager : Page
+    public partial class AuthenticationManager : UserControl
     {
-        public PageManager()
+        public AuthenticationManager()
         {
             InitializeComponent();
-            DataContext = new PageManagerViewModel();
         }
     }
 }

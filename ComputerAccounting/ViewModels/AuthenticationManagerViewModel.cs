@@ -8,10 +8,10 @@ using System.Windows.Controls;
 
 namespace ComputerAccounting.ViewModels
 {
-    class PageManagerViewModel : INotifyPropertyChanged
+    class AuthenticationManagerViewModel : BaseViewModel
     {
         private IPageSwitcher _currentPage;
-        public IPageSwitcher CurrentPage 
+        public IPageSwitcher CurrentPage
         {
             get => _currentPage;
             set
@@ -21,7 +21,7 @@ namespace ComputerAccounting.ViewModels
             }
         }
 
-        public PageManagerViewModel()
+        public AuthenticationManagerViewModel()
         {
             LoadPage(new AuthorizationViewModel());
         }
@@ -34,14 +34,8 @@ namespace ComputerAccounting.ViewModels
 
         private void Context_SwitchPage(object sender, PageEventArgs e)
         {
-            LoadPage(e.PageToLoad);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            if (e.NameView == NameView.Page)
+                LoadPage(e.PageToLoad);
         }
     }
 }

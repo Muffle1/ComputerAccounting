@@ -1,17 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Controls;
+﻿using System.ComponentModel;
 
 namespace ComputerAccounting.Pages
 {
+    public enum NameView
+    {
+        [Description("Страница")]
+        Page = 1,
+        [Description("Менеджер")]
+        Manager
+    }
+
     public class PageEventArgs
     {
-        internal IPageSwitcher PageToLoad { get; set; }
+        public IPageSwitcher PageToLoad { get; set; }
+        public NameView NameView { get; set; }
 
-        internal PageEventArgs(IPageSwitcher pageToLoad)
+        public PageEventArgs(IPageSwitcher pageToLoad, NameView nameView)
         {
             PageToLoad = pageToLoad;
+            NameView = nameView;
         }
     }
 
@@ -20,5 +27,6 @@ namespace ComputerAccounting.Pages
     public interface IPageSwitcher
     {
         event PageHandler SwitchPage;
+        
     }
 }

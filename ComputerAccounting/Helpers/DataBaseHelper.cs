@@ -14,6 +14,12 @@ namespace ComputerAccounting.Helpers
         public DataBaseHelper()
         {
             Database.EnsureCreated();
+            //InitializeAsync();
+        }
+
+        private async void InitializeAsync()
+        {
+            await Task.Run(() => Database.EnsureCreatedAsync());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

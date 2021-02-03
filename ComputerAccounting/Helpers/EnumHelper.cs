@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 
 namespace ComputerAccounting.Helpers
 {
@@ -16,10 +15,9 @@ namespace ComputerAccounting.Helpers
                 var field = type.GetField(name);
                 var fds = field.GetCustomAttributes(typeof(DescriptionAttribute), true);
                 foreach (DescriptionAttribute fd in fds)
-                {
                     descs.Add(fd.Description);
-                }
             }
+
             return descs;
         }
 
@@ -31,9 +29,8 @@ namespace ComputerAccounting.Helpers
             var field = type.GetField(name);
             var fds = field.GetCustomAttributes(typeof(DescriptionAttribute), true);
             foreach (DescriptionAttribute fd in fds)
-            {
                 descs = fd.Description;
-            }
+
             return descs;
         }
 

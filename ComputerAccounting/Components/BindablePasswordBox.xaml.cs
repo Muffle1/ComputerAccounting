@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ComputerAccounting.Components
 {
@@ -23,8 +13,8 @@ namespace ComputerAccounting.Components
 
         public string Password
         {
-            get { return (string)GetValue(PasswordProperty); }
-            set { SetValue(PasswordProperty, value); }
+            get => (string)GetValue(PasswordProperty);
+            set => SetValue(PasswordProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for Password.  This enables animation, styling, binding, etc...
@@ -36,9 +26,7 @@ namespace ComputerAccounting.Components
         private static void PasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is BindablePasswordBox passwordBox)
-            {
                 passwordBox.UpdatePassword();
-            }
         }
 
         public BindablePasswordBox()
@@ -56,10 +44,12 @@ namespace ComputerAccounting.Components
         {
             _isPasswordChanging = true;
             Password = PasswordField.Password;
+
             if (Password.Length == 0)
                 (PasswordField.Template.FindName("Placeholder", PasswordField) as TextBlock).Visibility = Visibility.Visible;
             else
                 (PasswordField.Template.FindName("Placeholder", PasswordField) as TextBlock).Visibility = Visibility.Collapsed;
+
             _isPasswordChanging = false;
         }
     }

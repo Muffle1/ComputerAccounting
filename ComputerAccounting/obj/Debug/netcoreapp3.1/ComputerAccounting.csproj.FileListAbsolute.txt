@@ -32,10 +32,7 @@ C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\net
 C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\netcoreapp3.1\Components\BindablePasswordBox.g.cs
 C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\netcoreapp3.1\Components\BindablePasswordBox.baml
 C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\netcoreapp3.1\Styles\ComboBoxDictionary.baml
-C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\netcoreapp3.1\ComputerAccounting.csprojAssemblyReference.cache
 C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\netcoreapp3.1\Components\PasswordBoxDictionary.baml
-C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\netcoreapp3.1\Pages\PageManager.g.cs
-C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\netcoreapp3.1\Pages\PageManager.baml
 C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\bin\Debug\netcoreapp3.1\Castle.Core.dll
 C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\bin\Debug\netcoreapp3.1\Microsoft.Data.Sqlite.dll
 C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
@@ -75,3 +72,7 @@ C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\bin\Debug\net
 C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\netcoreapp3.1\ComputerAccounting.csprojAssemblyReference.cache
+C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\netcoreapp3.1\Styles\BorderDictionary.baml
+C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\netcoreapp3.1\Pages\AuthenticationManager.g.cs
+C:\Users\Muffle\source\repos\ComputerAccounting\ComputerAccounting\obj\Debug\netcoreapp3.1\Pages\AuthenticationManager.baml

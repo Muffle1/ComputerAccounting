@@ -18,11 +18,36 @@ namespace ComputerAccounting.Pages
     /// <summary>
     /// Логика взаимодействия для AuthorizationPage.xaml
     /// </summary>
-    public partial class AuthorizationPage : Page
+    public partial class AuthorizationPage : UserControl
     {
         public AuthorizationPage()
         {
             InitializeComponent();
+            DataContextChanged += AuthorizationPage_DataContextChanged;
+        }
+
+        private void AuthorizationPage_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((sender as AuthorizationPage).DataContext is AuthorizationViewModel authorizationViewModel)
+                authorizationViewModel.ShowError += AuthorizationViewModel_ShowError;
+        }
+
+        private void AuthorizationViewModel_ShowError(string errorMessage)
+        {
+            Border border = Password.PasswordField.Template.FindName("border", Password.PasswordField) as Border;
+
+            if (errorMessage != "")
+            {
+                border.BorderBrush = new SolidColorBrush(Colors.Red);
+                Password.Error.Text = errorMessage;
+                Password.Error.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                border.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#107a2e"));
+                Password.Error.Text = errorMessage;
+                Password.Error.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

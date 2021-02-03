@@ -5,9 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComputerAccounting" 
         xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:viewmodels="clr-namespace:ComputerAccounting.ViewModels"
+        xmlns:page="clr-namespace:ComputerAccounting.Pages" 
         mc:Ignorable="d"
-        Title="MainWindow" Width="800" Height="500" Icon="Images/WindowIcon.png">
+        Title="MainWindow"
+        MinHeight="500"
+        MinWidth="700"
+        Icon="Images/WindowIcon.png"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:AuthenticationManagerViewModel}">
+           <page:AuthenticationManager/>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Grid>
-        <Frame Source="Pages/PageManager.xaml" NavigationUIVisibility="Hidden"/>
+        <ContentControl Content=""/>
     </Grid>
 </Window>

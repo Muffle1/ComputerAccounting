@@ -10,7 +10,7 @@
     <Compile Update="Components\BindablePasswordBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\PageManager.xaml.cs">
+    <Compile Update="Pages\AuthenticationManager.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\AuthorizationPage.xaml.cs">
@@ -27,13 +27,16 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\PageManager.xaml">
+    <Page Update="Pages\AuthenticationManager.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\AuthorizationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\BorderDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\ButtonDictionary.xaml">
