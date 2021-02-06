@@ -1,9 +1,8 @@
-﻿using ComputerAccounting.ViewModels;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace ComputerAccounting.Pages
+namespace ComputerAccounting
 {
     /// <summary>
     /// Логика взаимодействия для RegistrationPage.xaml

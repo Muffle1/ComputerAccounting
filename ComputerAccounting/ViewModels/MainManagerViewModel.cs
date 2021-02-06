@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Text;
-using System.Windows.Controls;
 
 namespace ComputerAccounting
 {
-    class AuthenticationManagerViewModel : BaseViewModel
+    class MainManagerViewModel : BaseViewModel
     {
+        private IViewSwitcher _sideMenu;
+        public IViewSwitcher SideMenu
+        {
+            get => _sideMenu;
+            set
+            {
+                _sideMenu = value;
+                OnPropertyChanged("SideMenu");
+            }
+        }
+
         private IViewSwitcher _currentPage;
         public IViewSwitcher CurrentPage
         {
@@ -20,24 +28,25 @@ namespace ComputerAccounting
             }
         }
 
-        public AuthenticationManagerViewModel()
+        public MainManagerViewModel()
         {
-            LoadPage(new AuthorizationViewModel());
+            //LoadView(new AuthorizationViewModel(), NameView.Page);
         }
 
-        public void LoadPage(IViewSwitcher viewModel)
+        public void LoadView(IViewSwitcher viewModel, NameView nameView)
         {
             viewModel.SwitchView += ViewModel_SwitchView;
-            CurrentPage = viewModel;
+
+            if (nameView == NameView.Control) SideMenu = viewModel;
+            if (nameView == NameView.Page) CurrentPage = viewModel;
         }
 
         private void ViewModel_SwitchView(object sender, ViewEventArgs e)
         {
-            if (e.NameView == NameView.Page)
-                LoadPage(e.ViewToLoad);
-
             if (e.NameView == NameView.Manager)
                 OnViewSwitched(e.ViewToLoad, NameView.Manager);
+            else
+                LoadView(e.ViewToLoad, e.NameView);
         }
     }
 }

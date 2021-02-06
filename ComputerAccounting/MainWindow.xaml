@@ -5,8 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComputerAccounting" 
         xmlns:system="clr-namespace:System;assembly=mscorlib"
-        xmlns:viewmodels="clr-namespace:ComputerAccounting.ViewModels"
-        xmlns:page="clr-namespace:ComputerAccounting.Pages" 
         mc:Ignorable="d"
         Title="MainWindow"
         MinHeight="500"
@@ -16,12 +14,16 @@
         WindowState="Maximized">
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewmodels:AuthenticationManagerViewModel}">
-           <page:AuthenticationManager/>
+        <DataTemplate DataType="{x:Type local:AuthenticationManagerViewModel}">
+            <local:AuthenticationManager/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:MainManagerViewModel}">
+            <local:MainManager/>
         </DataTemplate>
     </Window.Resources>
     
     <Grid>
-        <ContentControl Content=" "/>
+        <ContentControl Content="{Binding CurrentManager, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>

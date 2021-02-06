@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ComputerAccounting.Models
+namespace ComputerAccounting
 {
     public enum Role
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace ComputerAccounting.Helpers
+namespace ComputerAccounting
 {
     internal class EnumHelper
     {

@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace ComputerAccounting.Components
+namespace ComputerAccounting
 {
     /// <summary>
     /// Логика взаимодействия для BindablePasswordBox.xaml

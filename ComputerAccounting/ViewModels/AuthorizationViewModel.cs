@@ -1,20 +1,16 @@
-﻿using ComputerAccounting.Commands;
-using ComputerAccounting.Helpers;
-using ComputerAccounting.Models;
-using ComputerAccounting.Pages;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ComputerAccounting.ViewModels
+namespace ComputerAccounting
 {
-    public class AuthorizationViewModel : BaseViewModel, IPageSwitcher
+    public class AuthorizationViewModel : BaseViewModel
     {
         public delegate void ErrorHandler(string errorMessage);
         public event ErrorHandler ShowError;
+        private int SymbolCount;
 
-        public event PageHandler SwitchPage;
         private User _user;
 
         public AuthorizationViewModel()
@@ -46,7 +42,8 @@ namespace ComputerAccounting.ViewModels
 
             set
             {
-                _user.Password = value;
+                _user.Password = Hash(value);
+                SymbolCount = value.Length;
                 ShowError("");
                 ClearErrors("Pass");
                 OnPropertyChanged("Password");
@@ -60,7 +57,7 @@ namespace ComputerAccounting.ViewModels
             {
                 return _registrationPageCommand ??= new RelayCommand(o =>
                 {
-                    SwitchPage?.Invoke(this, new PageEventArgs(new RegistrationViewModel(), NameView.Page));
+                    OnViewSwitched(new RegistrationViewModel(), NameView.Page);
                 });
             }
         }
@@ -73,7 +70,7 @@ namespace ComputerAccounting.ViewModels
                 return _mainPageCommand ??= new RelayCommand(async o =>
                 {
                     if (await CheckData())
-                        MessageBox.Show("Успех!");                   
+                        OnViewSwitched(new MainManagerViewModel(), NameView.Manager);                  
                 });
             }
         }
@@ -83,10 +80,10 @@ namespace ComputerAccounting.ViewModels
             ClearErrors("Login");
             ClearErrors("Pass");
 
-            if ((_user.Login == null) || (_user.Login.Length <= 5))
+            if ((Login == null) || (Login.Length <= 5))
                 AddError("Login", "Логин должен быть больше 6 символов.");
 
-            if ((_user.Password == null) || (_user.Password.Length <= 5))
+            if ((Password == null) || (SymbolCount <= 5))
             {
                 ShowError("Пароль должен быть больше 6 символов.");
                 AddError("Pass", "Пароль должен быть больше 6 символов.");
@@ -97,7 +94,7 @@ namespace ComputerAccounting.ViewModels
             return await Task.Run(() =>
             {
                 using DataBaseHelper db = new DataBaseHelper();
-                if (db.Users.Any(u => (u.Login == _user.Login) && (u.Password == _user.Password)))
+                if (db.Users.Any(u => (u.Login == Login) && (u.Password == Password)))
                     return true;
                 else
                     AddError("Login", "Неверно введён логин или пароль");

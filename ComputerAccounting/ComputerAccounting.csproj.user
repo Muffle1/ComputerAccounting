@@ -10,10 +10,22 @@
     <Compile Update="Components\BindablePasswordBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\FirstSideMenuControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\SecondSideMenuControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\SideMenuItemControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\AuthenticationManager.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\AuthorizationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\MainManager.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\RegistrationPage.xaml.cs">
@@ -24,6 +36,15 @@
     <Page Update="Components\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Controls\FirstSideMenuControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\SecondSideMenuControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\SideMenuItemControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -31,6 +52,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\AuthorizationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MainManager.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\RegistrationPage.xaml">
