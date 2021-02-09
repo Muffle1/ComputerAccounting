@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace ComputerAccounting
 {
@@ -35,9 +33,6 @@ namespace ComputerAccounting
             if (_propertyErrors.Remove(propertyName))
                 OnErrorsChanged(propertyName);
         }
-
-        public string Hash(string input) =>
-            Convert.ToBase64String(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(input)));
 
         public void OnPropertyChanged([CallerMemberName] string prop = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));

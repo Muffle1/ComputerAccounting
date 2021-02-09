@@ -41,7 +41,7 @@ namespace ComputerAccounting
 
             set
             {
-                _user.Password = Hash(value);
+                //_user.Password = Hash(value);
                 SymbolCount = value.Length;
                 ShowError("");
                 ClearErrors("Pass");

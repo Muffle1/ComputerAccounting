@@ -8,61 +8,17 @@ namespace ComputerAccounting
     {
         public delegate void ErrorHandler(string errorMessage);
         public event ErrorHandler ShowError;
-        private int SymbolCount;
 
         public RegistrationViewModel()
         {
             User = new User();
         }
 
-        private User _user;
-        public User User
-        {
-            get => _user;
-            set => _user = value;
-        }
-
-        public string Login
-        {
-            get => _user.Login;
-
-            set
-            {
-                _user.Login = value;
-                ClearErrors("Login");
-                OnPropertyChanged("Login");
-            }
-        }
-
-        public string Password
-        {
-            get => _user.Password;
-
-            set
-            {
-                _user.Password = Hash(value);
-                SymbolCount = value.Length;
-                ShowError("");
-                ClearErrors("Pass");
-                OnPropertyChanged("Password");
-            }
-        }
-
-        public string SelectedRole
-        {
-            get => EnumHelper.GetEnumDescription(_user.Role);
-
-            set
-            {
-                _user.Role = EnumHelper.GetValueFromDescription<Role>(value);
-                OnPropertyChanged("SelectedRole");
-            }
-        }
+        public User User { get; set; }
 
         public IEnumerable<string> Roles
         {
             get => EnumHelper.GetEnumDescriptions(new Role().GetType());
-            set => OnPropertyChanged("Roles");
         }
 
         private RelayCommand _authorizationPageCommand;
@@ -92,13 +48,14 @@ namespace ComputerAccounting
 
         public async Task<bool> CheckData()
         {
-            ClearErrors("Login");
+            ClearErrors("User.Login");
             ClearErrors("Pass");
+            ShowError("");
 
-            if ((Login == null) || (Login.Length <= 5))
-                AddError("Login", "Логин должен быть больше 6 символов.");
+            if ((User.Login == null) || (User.Login.Length <= 5))
+                AddError("User.Login", "Логин должен быть больше 6 символов.");
 
-            if ((Password == null) || (SymbolCount <= 5))
+            if ((User.Password == null) || (User.SymbolCount <= 5))
             {
                 ShowError("Пароль должен быть больше 6 символов.");
                 AddError("Pass", "Пароль должен быть больше 6 символов.");
@@ -109,15 +66,15 @@ namespace ComputerAccounting
             return await Task.Run(() =>
             {
                 using DataBaseHelper db = new DataBaseHelper();
-                if (!db.Users.Any(u => u.Login == Login))
+                if (!db.Users.Any(u => u.Login == User.Login))
                 {
-                    db.Users.Add(_user);
+                    db.Users.Add(User);
                     db.SaveChanges();
 
                     return true;
                 }
                 else
-                    AddError("Login", "Пользователь с таким логином уже есть.");
+                    AddError("User.Login", "Пользователь с таким логином уже есть.");
 
                 return false;
             });
