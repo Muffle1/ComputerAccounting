@@ -13,11 +13,6 @@ namespace ComputerAccounting
     {
         public readonly Dictionary<string, List<string>> _propertyErrors = new Dictionary<string, List<string>>();
 
-        public BaseViewModel()
-        {
-
-        }
-
         public bool HasErrors => _propertyErrors.Any();
 
         public event PropertyChangedEventHandler PropertyChanged;

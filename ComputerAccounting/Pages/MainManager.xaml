@@ -16,13 +16,15 @@
                 <ResourceDictionary Source="/Styles/Colors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-
+            <DataTemplate DataType="{x:Type local:FirstSideMenuViewModel}">
+                <local:FirstSideMenuControl/>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
@@ -41,15 +43,15 @@
 
                     <Button Style="{StaticResource ButtonTopBarStyle}"
                             Content="&#xE770;"
-                            Foreground="{StaticResource button-main-foreground}"
-                            Background="{StaticResource button-main-background}"
+                            Foreground="{StaticResource button-login-foreground}"
+                            Background="{StaticResource button-login-background}"
                             BorderBrush="{StaticResource gray-82}"
                             HorizontalContentAlignment="Center"/>
 
                     <Button Style="{StaticResource ButtonTopBarStyle}"
                             Content="&#xE77B;"
-                            Foreground="{StaticResource button-main-foreground}"
-                            Background="{StaticResource button-main-background}"
+                            Foreground="{StaticResource button-login-foreground}"
+                            Background="{StaticResource button-login-background}"
                             BorderBrush="{StaticResource gray-82}"
                             HorizontalContentAlignment="Center"/>
 
@@ -57,14 +59,10 @@
 
             </Grid>
 
-            <StackPanel Orientation="Vertical"
-                        Background="{StaticResource color-main-dark}"
-                        Grid.Row="1">
-
-                
-                <ContentControl Content="{Binding SideMenu, UpdateSourceTrigger=PropertyChanged}"/>
-
-            </StackPanel>
+            <Grid Background="{StaticResource color-main-dark}"
+                  Grid.Row="1">
+                <ContentControl VerticalContentAlignment="Stretch" Content="{Binding SideMenu, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
 
         </Grid>
 

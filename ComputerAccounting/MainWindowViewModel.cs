@@ -19,17 +19,17 @@ namespace ComputerAccounting
 
         public MainWindowViewModel()
         {
-            LoadManager(new MainManagerViewModel());
-            //LoadManager(new AuthenticationManagerViewModel());
+            //LoadManager(new MainManagerViewModel());
+            LoadManager(new AuthenticationManagerViewModel());
         }
 
         public void LoadManager(IViewSwitcher viewModel)
         {
-            viewModel.SwitchView += ViewModel_SwitchPage;
+            viewModel.SwitchView += ViewModel_SwitchView;
             CurrentManager = viewModel;
         }
 
-        private void ViewModel_SwitchPage(object sender, ViewEventArgs e)
+        private void ViewModel_SwitchView(object sender, ViewEventArgs e)
         {
             LoadManager(e.ViewToLoad);
         }

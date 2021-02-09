@@ -20,6 +20,14 @@
         <Setter Property="FontStyle" Value="Italic"/>
 
     </Style>
-    
+
+    <Style x:Key="TextBlockSideMenuStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="5 5"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontFamily" Value="Calibri"/>
+
+    </Style>
     
 </ResourceDictionary>

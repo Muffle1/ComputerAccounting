@@ -31,7 +31,7 @@
             <StackPanel>
                 <TextBlock Style="{StaticResource TextBlockAuthenticationStyle}"
                            Text="Регистрация"
-                           Foreground="{StaticResource textblock-main-foreground}"/>
+                           Foreground="{StaticResource textblock-login-foreground}"/>
 
                 <TextBox Style="{DynamicResource TextBoxAuthenticationStyle}"
                          Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
@@ -47,7 +47,7 @@
                 <TextBlock Style="{StaticResource TextBlockAuthenticationStyle}"
                            Text="Роль"
                            FontSize="18"
-                           Foreground="{StaticResource textblock-main-foreground}"
+                           Foreground="{StaticResource textblock-login-foreground}"
                            Margin="0"/>
 
                 <ComboBox Style="{StaticResource ComboBoxAuthenticationStyle}" 
@@ -61,8 +61,8 @@
                 <Button Style="{StaticResource ButtonAuthenticationStyle}"
                         Command="{Binding AuthorizationPageCommand}"
                         Content="Регистрация"
-                        Foreground="{StaticResource button-main-foreground}"
-                        Background="{StaticResource button-main-background}"
+                        Foreground="{StaticResource button-login-foreground}"
+                        Background="{StaticResource button-login-background}"
                         BorderBrush="{StaticResource gray-82}"
                         HorizontalContentAlignment="Center"/>
 
@@ -72,8 +72,8 @@
                         Padding="5 0"
                         FontSize="15"
                         Margin="20 2"
-                        Foreground="{StaticResource button-main-foreground}"
-                        Background="{StaticResource button-main-background}"
+                        Foreground="{StaticResource button-login-foreground}"
+                        Background="{StaticResource button-login-background}"
                         BorderBrush="{StaticResource gray-82}"
                         HorizontalContentAlignment="Center"/>
             </StackPanel>

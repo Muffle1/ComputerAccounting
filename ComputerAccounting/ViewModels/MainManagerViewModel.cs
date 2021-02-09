@@ -30,7 +30,7 @@ namespace ComputerAccounting
 
         public MainManagerViewModel()
         {
-            //LoadView(new AuthorizationViewModel(), NameView.Page);
+            LoadView(new FirstSideMenuViewModel(), NameView.Control);
         }
 
         public void LoadView(IViewSwitcher viewModel, NameView nameView)

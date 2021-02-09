@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ComputerAccounting.Controls
+namespace ComputerAccounting
 {
     /// <summary>
     /// Логика взаимодействия для FirstSideMenuControl.xaml

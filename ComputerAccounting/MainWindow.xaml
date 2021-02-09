@@ -7,8 +7,8 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow"
-        MinHeight="500"
-        MinWidth="700"
+        MinHeight="900"
+        MinWidth="1300"
         Icon="Images/WindowIcon.png"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized">

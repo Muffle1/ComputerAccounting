@@ -10,13 +10,12 @@ namespace ComputerAccounting
         public event ErrorHandler ShowError;
         private int SymbolCount;
 
-        private User _user;
-
         public RegistrationViewModel()
         {
             User = new User();
         }
 
+        private User _user;
         public User User
         {
             get => _user;
