@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ComputerAccounting"
+             d:DataContext="{d:DesignInstance Type=local:FirstSideMenuViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="800">
 
@@ -11,6 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/TextBlockDictionary.xaml"/>
+                <ResourceDictionary Source="/Styles/TextBoxDictionary.xaml"/>
                 <ResourceDictionary Source="/Styles/ButtonDictionary.xaml"/>
                 <ResourceDictionary Source="/Styles/Colors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -21,12 +23,12 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
-        
+
         <ScrollViewer HorizontalScrollBarVisibility="Auto"
                       Grid.Row="0">
-            <ItemsControl ItemsSource="{Binding Cabinets}">
+            <ItemsControl ItemsSource="{Binding Cabinets, UpdateSourceTrigger=PropertyChanged}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <local:SideMenuItemControl/>
@@ -35,12 +37,26 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <Button Style="{StaticResource ButtonAddStyle}"
-                Grid.Row="1"
-                Content="Добавить кабинет"
-                Foreground="Black"
-                Background="{StaticResource button-add-background}"
-                BorderBrush="{StaticResource gray-82}"
-                HorizontalAlignment="Stretch"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <TextBox Style="{StaticResource TextBoxMainStyle}"
+                     Text="{Binding Cabinet.Title, UpdateSourceTrigger=PropertyChanged}"
+                     Tag="Введите название кабинета"
+                     Grid.Row="0"
+                     BorderBrush="{StaticResource inputfield-main-border}"
+                     HorizontalContentAlignment="Center"/>
+
+            <Button Style="{StaticResource ButtonAddStyle}"
+                    Command="{Binding AddCabinetCommand}"
+                    Grid.Row="1"
+                    Content="Добавить кабинет"
+                    Foreground="Black"
+                    Background="{StaticResource button-add-background}"
+                    BorderBrush="{StaticResource gray-82}"
+                    HorizontalAlignment="Stretch"/>
+        </Grid>
     </Grid>
 </UserControl>

@@ -14,7 +14,7 @@ namespace ComputerAccounting
         LaboratoryHead
     }
 
-    public class User
+    public class User : BaseModel
     {
         public int UserId { get; set; }
         public string Login { get; set; }
@@ -34,8 +34,5 @@ namespace ComputerAccounting
         }
 
         public Role Role { get; set; } = Role.Engineer;
-
-        public string Hash(string input) =>
-            Convert.ToBase64String(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(input)));
     }
 }

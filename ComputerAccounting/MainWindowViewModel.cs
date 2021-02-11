@@ -19,8 +19,8 @@ namespace ComputerAccounting
 
         public MainWindowViewModel()
         {
-            //LoadManager(new MainManagerViewModel());
-            LoadManager(new AuthenticationManagerViewModel());
+            LoadManager(new MainManagerViewModel());
+            //LoadManager(new AuthenticationManagerViewModel());
         }
 
         public void LoadManager(IViewSwitcher viewModel)

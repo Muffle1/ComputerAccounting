@@ -36,15 +36,14 @@
                            Foreground="{StaticResource textblock-login-foreground}"/>
 
                 <TextBox Style="{DynamicResource TextBoxAuthenticationStyle}"
-                         Text="{Binding User.Login, UpdateSourceTrigger=PropertyChanged}"
-                         x:Name="Login"
+                         Text="{Binding User.Login}"
                          Tag="Логин"
                          BorderBrush="{StaticResource inputfield-main-border}"
                          HorizontalContentAlignment="Center"/>
 
                 <local:BindablePasswordBox x:Name="Password"
                         BorderBrush="{StaticResource inputfield-main-border}"
-                        Password="{Binding User.Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                        Password="{Binding User.Password, ValidatesOnDataErrors=True}"/>
 
                 <TextBlock Style="{StaticResource TextBlockAuthenticationStyle}"
                            Text="Роль"
@@ -52,12 +51,11 @@
                            Foreground="{StaticResource textblock-login-foreground}"
                            Margin="0"/>
 
-                <ComboBox Style="{StaticResource ComboBoxAuthenticationStyle}" 
-                          x:Name="RoleList"
+                <ComboBox Style="{StaticResource ComboBoxAuthenticationStyle}"
                           BorderBrush="{StaticResource inputfield-main-border}"
                           HorizontalContentAlignment="Center"
-                          ItemsSource="{Binding Roles, UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding User.Role, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource RoleConverter}}">
+                          ItemsSource="{Binding Roles}"
+                          SelectedItem="{Binding User.Role, Converter={StaticResource RoleConverter}}">
                 </ComboBox>
 
                 <Button Style="{StaticResource ButtonAuthenticationStyle}"

@@ -9,6 +9,7 @@ namespace ComputerAccounting
     public class DataBaseHelper : DbContext, IDisposable
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Cabinet> Cabinets { get; set; }
 
         public DataBaseHelper()
         {
@@ -16,10 +17,10 @@ namespace ComputerAccounting
             //InitializeAsync();
         }
 
-        private async void InitializeAsync()
-        {
-            await Task.Run(() => Database.EnsureCreatedAsync());
-        }
+        //private async void InitializeAsync()
+        //{
+        //    await Task.Run(() => Database.EnsureCreatedAsync());
+        //}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

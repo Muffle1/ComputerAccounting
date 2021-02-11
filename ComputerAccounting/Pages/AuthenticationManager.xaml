@@ -33,6 +33,10 @@
     </UserControl.Style>
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/BackgroundAuth.jpg"/>
+        </Grid.Background>
+        
         <ContentControl Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </UserControl>

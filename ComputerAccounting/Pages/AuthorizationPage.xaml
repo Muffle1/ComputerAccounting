@@ -35,7 +35,7 @@
                            Foreground="{StaticResource textblock-login-foreground}"/>
 
                 <TextBox Style="{DynamicResource TextBoxAuthenticationStyle}"
-                         Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding User.Login}"
                          x:Name="Login"
                          Tag="Логин"
                          BorderBrush="{StaticResource inputfield-main-border}"
@@ -43,7 +43,7 @@
                 
                 <local:BindablePasswordBox x:Name="Password"
                         BorderBrush="{StaticResource inputfield-main-border}"
-                        Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+                        Password="{Binding User.Password, ValidatesOnDataErrors=True}"/>
 
                 <Button Style="{StaticResource ButtonAuthenticationStyle}"
                         Command="{Binding MainPageCommand}"

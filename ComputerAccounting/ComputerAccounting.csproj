@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\BackgroundAuth.jpg" />
     <None Remove="Images\WindowIcon.png" />
     <None Remove="WindowIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Images\BackgroundAuth.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\WindowIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

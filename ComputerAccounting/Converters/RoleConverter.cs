@@ -8,10 +8,8 @@ namespace ComputerAccounting
 {
     class RoleConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return EnumHelper.GetEnumDescription((Role)Enum.Parse(typeof(Role), value.ToString()));
-        }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
+            EnumHelper.GetEnumDescription((Role)Enum.Parse(typeof(Role), value.ToString()));
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

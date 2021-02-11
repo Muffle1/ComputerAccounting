@@ -28,7 +28,7 @@ namespace ComputerAccounting
             {
                 return _authorizationPageCommand ??= new RelayCommand(async o =>
                     {
-                        if (await CheckData())
+                        if (await CheckUser())
                             OnViewSwitched(new AuthorizationViewModel(), NameView.Page);
                     });
             }
@@ -46,22 +46,22 @@ namespace ComputerAccounting
             }
         }
 
-        public async Task<bool> CheckData()
+        private async Task<bool> CheckUser()
         {
-            ClearErrors("User.Login");
-            ClearErrors("Pass");
+            User.ClearErrors(nameof(User.Login));
+            User.ClearErrors("Pass");
             ShowError("");
 
             if ((User.Login == null) || (User.Login.Length <= 5))
-                AddError("User.Login", "Логин должен быть больше 6 символов.");
+                User.AddError(nameof(User.Login), "Логин должен быть больше 6 символов.");
 
             if ((User.Password == null) || (User.SymbolCount <= 5))
             {
                 ShowError("Пароль должен быть больше 6 символов.");
-                AddError("Pass", "Пароль должен быть больше 6 символов.");
+                User.AddError("Pass", "Пароль должен быть больше 6 символов.");
             }
 
-            if (HasErrors) return false;
+            if (User.HasErrors) return false;
 
             return await Task.Run(() =>
             {
@@ -74,7 +74,7 @@ namespace ComputerAccounting
                     return true;
                 }
                 else
-                    AddError("User.Login", "Пользователь с таким логином уже есть.");
+                    User.AddError(nameof(User.Login), "Пользователь с таким логином уже есть.");
 
                 return false;
             });
