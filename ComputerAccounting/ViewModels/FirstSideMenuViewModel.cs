@@ -19,13 +19,14 @@ namespace ComputerAccounting
 
             _db = new DataBaseHelper();
             _db.Cabinets.Load();
-            Cabinets = new ObservableCollection<Cabinet>(_db.Cabinets.Local);
+            Cabinets = _db.Cabinets.Local.ToObservableCollection();
         }
 
         private Cabinet _cabinet;
         public Cabinet Cabinet 
         {
             get => _cabinet;
+
             set
             {
                 _cabinet = value;
@@ -65,8 +66,8 @@ namespace ComputerAccounting
             {
                 return _deleteCabinetCommand ??= new RelayCommand(o =>
                 {
-                    Cabinet removableCabinet = new Cabinet() { Title = o.ToString() };
-                    _db.Cabinets.Remove(removableCabinet);
+                    _db.Remove(_db.Cabinets.Single(x => x.CabinetId == Convert.ToInt32(o)));
+                    _db.SaveChanges();
                 });
             }
         }

@@ -4,7 +4,13 @@ using System.Text;
 
 namespace ComputerAccounting
 {
-    class MainManagerViewModel : BaseViewModel
+    public enum NameSideMenu
+    {
+        FirstMenu = 1,
+        SecondMenu
+    }
+
+    public class MainManagerViewModel : BaseViewModel
     {
         private IViewSwitcher _sideMenu;
         public IViewSwitcher SideMenu
@@ -13,7 +19,7 @@ namespace ComputerAccounting
             set
             {
                 _sideMenu = value;
-                OnPropertyChanged("SideMenu");
+                OnPropertyChanged(nameof(SideMenu));
             }
         }
 
@@ -24,12 +30,25 @@ namespace ComputerAccounting
             set
             {
                 _currentPage = value;
-                OnPropertyChanged("CurrentPage");
+                OnPropertyChanged(nameof(CurrentPage));
+            }
+        }
+
+        private NameSideMenu _nameSideMenu;
+        public NameSideMenu NameSideMenu
+        {
+            get => _nameSideMenu;
+
+            set
+            {
+                _nameSideMenu = value;
+                OnPropertyChanged(nameof(NameSideMenu));
             }
         }
 
         public MainManagerViewModel()
         {
+            NameSideMenu = NameSideMenu.FirstMenu;
             LoadView(new FirstSideMenuViewModel(), NameView.Control);
         }
 
@@ -47,6 +66,28 @@ namespace ComputerAccounting
                 OnViewSwitched(e.ViewToLoad, NameView.Manager);
             else
                 LoadView(e.ViewToLoad, e.NameView);
+        }
+
+        private RelayCommand _switchControlCommand;
+        public RelayCommand SwitchControlCommand
+        {
+            get
+            {
+                return _switchControlCommand ??= new RelayCommand(o =>
+                {
+                    if ((NameSideMenu)Enum.Parse(typeof(NameSideMenu), o.ToString()) == NameSideMenu.FirstMenu)
+                    {
+                        NameSideMenu = NameSideMenu.FirstMenu;
+                        LoadView(new FirstSideMenuViewModel(), NameView.Control);
+                    }
+
+                    if ((NameSideMenu)Enum.Parse(typeof(NameSideMenu), o.ToString()) == NameSideMenu.SecondMenu)
+                    {
+                        NameSideMenu = NameSideMenu.SecondMenu;
+                        LoadView(new SecondSideMenuViewModel(), NameView.Control);
+                    }
+                });
+            }
         }
     }
 }

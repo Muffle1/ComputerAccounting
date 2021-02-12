@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ComputerAccounting"
              d:DataContext="{d:DesignInstance Type=local:MainManagerViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="1920" d:DesignWidth="1080"
              Background="White">
 
     <UserControl.Resources>
@@ -19,6 +19,11 @@
             <DataTemplate DataType="{x:Type local:FirstSideMenuViewModel}">
                 <local:FirstSideMenuControl/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type local:SecondSideMenuViewModel}">
+                <local:SecondSideMenuControl/>
+            </DataTemplate>
+
+            <local:SideMenuColorConverter x:Key="SideMenuColorConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -38,22 +43,45 @@
             <Grid Background="{StaticResource color-main-darker}">
 
                 <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Grid.Row="0">
+                            HorizontalAlignment="Center"
+                            Grid.Row="0"
+                            Margin="0 5 0 0">
 
-                    <Button Style="{StaticResource ButtonTopBarStyle}"
-                            Content="&#xE770;"
-                            Foreground="{StaticResource button-login-foreground}"
-                            Background="{StaticResource button-login-background}"
-                            BorderBrush="{StaticResource gray-82}"
-                            HorizontalContentAlignment="Center"/>
+                    <Grid Margin="0 0 5 0">
+                        <Border Background="{StaticResource color-main-dark}"
+                                CornerRadius="10 0 10 0"
+                                Visibility="{Binding NameSideMenu, 
+                                                     Converter={StaticResource SideMenuColorConverter}, 
+                                                     ConverterParameter={x:Static local:NameSideMenu.FirstMenu},
+                                                     UpdateSourceTrigger=PropertyChanged}"/>
 
-                    <Button Style="{StaticResource ButtonTopBarStyle}"
-                            Content="&#xE77B;"
-                            Foreground="{StaticResource button-login-foreground}"
-                            Background="{StaticResource button-login-background}"
-                            BorderBrush="{StaticResource gray-82}"
-                            HorizontalContentAlignment="Center"/>
+                        <Button Style="{StaticResource ButtonTopBarStyle}"
+                                Command="{Binding SwitchControlCommand}"
+                                CommandParameter="{x:Static local:NameSideMenu.FirstMenu}"
+                                Content="&#xE770;"
+                                Foreground="{StaticResource button-login-foreground}"
+                                Background="{StaticResource button-login-background}"
+                                BorderBrush="{StaticResource gray-82}"
+                                HorizontalContentAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Margin="5 0 0 0">
+                        <Border Background="{StaticResource color-main-dark}"
+                                CornerRadius="0 10 0 10"
+                                Visibility="{Binding NameSideMenu, 
+                                                     Converter={StaticResource SideMenuColorConverter}, 
+                                                     ConverterParameter={x:Static local:NameSideMenu.SecondMenu},
+                                                     UpdateSourceTrigger=PropertyChanged}"/>
+                        
+                        <Button Style="{StaticResource ButtonTopBarStyle}"
+                                    Command="{Binding SwitchControlCommand}"
+                                    CommandParameter="{x:Static local:NameSideMenu.SecondMenu}"
+                                    Content="&#xE77B;"
+                                    Foreground="{StaticResource button-login-foreground}"
+                                    Background="{StaticResource button-login-background}"
+                                    BorderBrush="{StaticResource gray-82}"
+                                    HorizontalContentAlignment="Center"/>
+                    </Grid>
 
                 </StackPanel>
 
@@ -61,7 +89,9 @@
 
             <Grid Background="{StaticResource color-main-dark}"
                   Grid.Row="1">
+
                 <ContentControl VerticalContentAlignment="Stretch" Content="{Binding SideMenu, UpdateSourceTrigger=PropertyChanged}"/>
+
             </Grid>
 
         </Grid>
