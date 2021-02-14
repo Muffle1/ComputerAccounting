@@ -50,6 +50,7 @@ namespace ComputerAccounting
         {
             NameSideMenu = NameSideMenu.FirstMenu;
             LoadView(new FirstSideMenuViewModel(), NameView.Control);
+            LoadView(new CabinetViewModel(), NameView.Page);
         }
 
         public void LoadView(IViewSwitcher viewModel, NameView nameView)

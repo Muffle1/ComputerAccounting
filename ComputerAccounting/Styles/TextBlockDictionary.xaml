@@ -5,7 +5,7 @@
     <Style x:Key="TextBlockBaseStyle" TargetType="TextBlock">
         
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
 

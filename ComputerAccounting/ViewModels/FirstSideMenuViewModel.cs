@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,17 +14,8 @@ namespace ComputerAccounting
     {
         private DataBaseHelper _db;
 
-        public FirstSideMenuViewModel()
-        {
-            Cabinet = new Cabinet();
-
-            _db = new DataBaseHelper();
-            _db.Cabinets.Load();
-            Cabinets = _db.Cabinets.Local.ToObservableCollection();
-        }
-
         private Cabinet _cabinet;
-        public Cabinet Cabinet 
+        public Cabinet Cabinet
         {
             get => _cabinet;
 
@@ -31,6 +23,18 @@ namespace ComputerAccounting
             {
                 _cabinet = value;
                 OnPropertyChanged(nameof(Cabinet));
+            }
+        }
+
+        private Cabinet _selectedCabinet;
+        public Cabinet SelectedCabinet
+        {
+            get => _selectedCabinet;
+
+            set
+            {
+                _selectedCabinet = value;
+                OnPropertyChanged(nameof(SelectedCabinet));
             }
         }
 
@@ -69,6 +73,25 @@ namespace ComputerAccounting
                     _db.Remove(_db.Cabinets.Single(x => x.CabinetId == Convert.ToInt32(o)));
                     _db.SaveChanges();
                 });
+            }
+        }
+
+        public FirstSideMenuViewModel()
+        {
+            Cabinet = new Cabinet();
+
+            _db = new DataBaseHelper();
+            _db.Cabinets.Load();
+            Cabinets = _db.Cabinets.Local.ToObservableCollection();
+
+            PropertyChanged += FirstSideMenuViewModel_PropertyChanged;
+        }
+
+        private void FirstSideMenuViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SelectedCabinet))
+            {
+
             }
         }
 

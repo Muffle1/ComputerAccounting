@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ComputerAccounting"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             MaxWidth="350"
              d:DesignHeight="50" d:DesignWidth="350">
 
     <UserControl.Resources>
@@ -21,7 +22,7 @@
     </UserControl.Resources>
 
     <Border HorizontalAlignment="Stretch"
-            Margin="10 5"
+            Margin="5"
             Padding="10 5"
             CornerRadius="10"
             Background="{StaticResource button-sidemenu-background}"

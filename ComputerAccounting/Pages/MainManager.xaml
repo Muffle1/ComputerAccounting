@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ComputerAccounting"
              d:DataContext="{d:DesignInstance Type=local:MainManagerViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="1920" d:DesignWidth="1080"
+             d:DesignHeight="1080" d:DesignWidth="1920"
              Background="White">
 
     <UserControl.Resources>
@@ -21,6 +21,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type local:SecondSideMenuViewModel}">
                 <local:SecondSideMenuControl/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type local:CabinetViewModel}">
+                <local:CabinetPage/>
             </DataTemplate>
 
             <local:SideMenuColorConverter x:Key="SideMenuColorConverter"/>
@@ -96,6 +99,6 @@
 
         </Grid>
 
-        <ContentControl Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Background="#54bf54"/>
+        <ContentControl Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
     </Grid>
 </UserControl>

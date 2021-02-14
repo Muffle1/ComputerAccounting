@@ -25,6 +25,9 @@
     <Compile Update="Pages\AuthorizationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\CabinetPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\MainManager.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -54,6 +57,9 @@
     <Page Update="Pages\AuthorizationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Pages\CabinetPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Pages\MainManager.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -73,6 +79,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Components\PasswordBoxDictionary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Styles\ListBoxDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\TextBlockDictionary.xaml">
