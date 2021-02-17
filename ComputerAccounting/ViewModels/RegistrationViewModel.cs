@@ -6,9 +6,6 @@ namespace ComputerAccounting
 {
     public class RegistrationViewModel : BaseViewModel
     {
-        public delegate void ErrorHandler(string errorMessage);
-        public event ErrorHandler ShowError;
-
         public RegistrationViewModel()
         {
             User = new User();
@@ -28,7 +25,7 @@ namespace ComputerAccounting
             {
                 return _authorizationPageCommand ??= new RelayCommand(async o =>
                     {
-                        if (await CheckUser())
+                        if (await CheckUser((int)o))
                             OnViewSwitched(new AuthorizationViewModel(), NameView.Page);
                     });
             }
@@ -46,20 +43,16 @@ namespace ComputerAccounting
             }
         }
 
-        private async Task<bool> CheckUser()
+        private async Task<bool> CheckUser(int symbolCount)
         {
             User.ClearErrors(nameof(User.Login));
-            User.ClearErrors("Pass");
-            ShowError("");
+            User.ClearErrors(nameof(User.Password));
 
             if ((User.Login == null) || (User.Login.Length <= 5))
                 User.AddError(nameof(User.Login), "Логин должен быть больше 6 символов.");
 
-            if ((User.Password == null) || (User.SymbolCount <= 5))
-            {
-                ShowError("Пароль должен быть больше 6 символов.");
-                User.AddError("Pass", "Пароль должен быть больше 6 символов.");
-            }
+            if ((User.Password == null) || (symbolCount <= 5))
+                User.AddError(nameof(User.Password), "Пароль должен быть больше 6 символов.");
 
             if (User.HasErrors) return false;
 
@@ -78,7 +71,6 @@ namespace ComputerAccounting
 
                 return false;
             });
-
         }
     }
 }

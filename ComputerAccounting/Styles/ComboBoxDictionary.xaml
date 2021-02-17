@@ -35,12 +35,12 @@
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="#FFABADB3"/>
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Background" Color="Transparent"/>
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Button.Border" Color="Transparent"/>
-    <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="#adadad"/>
-    <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#18d64e"/>
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="Transparent"/>
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Border" Color="#13912f"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Glyph" Color="#FF000000"/>
-    <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="#adadad"/>
-    <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Border" Color="#18d64e"/>
-    <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Background" Color="#adadad"/>
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Background" Color="Transparent"/>
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Border" Color="#13912f"/>
+    <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Background" Color="Transparent"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Border" Color="#adadad"/>
     <LinearGradientBrush x:Key="ComboBox.Pressed.Background" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#FFDAECFC" Offset="0.0"/>
@@ -208,7 +208,7 @@
     <Style x:Key="ComboBoxAuthenticationStyle" TargetType="ComboBox" BasedOn="{StaticResource ComboBoxBaseStyle}">
 
         <Setter Property="BorderThickness" Value="0 0 0 1.5"/>
-        <Setter Property="Margin" Value="20 0 20 5"/>
+        <Setter Property="Margin" Value="0 0 0 5"/>
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Padding" Value="10 5"/>

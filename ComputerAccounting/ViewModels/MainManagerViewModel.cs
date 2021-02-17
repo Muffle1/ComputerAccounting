@@ -46,19 +46,24 @@ namespace ComputerAccounting
             }
         }
 
-        public MainManagerViewModel()
+        public User User { get; set; }
+
+        public MainManagerViewModel(User user)
         {
+            User = user;
             NameSideMenu = NameSideMenu.FirstMenu;
             LoadView(new FirstSideMenuViewModel(), NameView.Control);
-            LoadView(new CabinetViewModel(), NameView.Page);
         }
 
         public void LoadView(IViewSwitcher viewModel, NameView nameView)
         {
-            viewModel.SwitchView += ViewModel_SwitchView;
+            if (viewModel != null)
+            {
+                viewModel.SwitchView += ViewModel_SwitchView;
 
-            if (nameView == NameView.Control) SideMenu = viewModel;
-            if (nameView == NameView.Page) CurrentPage = viewModel;
+                if (nameView == NameView.Control) SideMenu = viewModel;
+                if (nameView == NameView.Page) CurrentPage = viewModel;
+            }
         }
 
         private void ViewModel_SwitchView(object sender, ViewEventArgs e)
@@ -85,7 +90,7 @@ namespace ComputerAccounting
                     if ((NameSideMenu)Enum.Parse(typeof(NameSideMenu), o.ToString()) == NameSideMenu.SecondMenu)
                     {
                         NameSideMenu = NameSideMenu.SecondMenu;
-                        LoadView(new SecondSideMenuViewModel(), NameView.Control);
+                        LoadView(new SecondSideMenuViewModel(User), NameView.Control);
                     }
                 });
             }

@@ -6,17 +6,19 @@
     <SolidColorBrush x:Key="gray-db" Color="#dbdbdb"/>
 
     <SolidColorBrush x:Key="textblock-login-foreground" Color="#073169"/>
-    <SolidColorBrush x:Key="textblock-sidemenu-foreground" Color="#34eb49"/>
-
-    <SolidColorBrush x:Key="inputfield-main-border" Color="#107a2e"/>
+    <SolidColorBrush x:Key="textblock-sidemenu-foreground" Color="#d9d9d9"/>
 
     <SolidColorBrush x:Key="button-login-foreground" Color="#5c1b87"/>
     <SolidColorBrush x:Key="button-login-background" Color="#abccff"/>
-    <SolidColorBrush x:Key="button-sidemenu-background" Color="#094d18"/>
-    <SolidColorBrush x:Key="button-delete-background" Color="#e05f55"/>
-    <SolidColorBrush x:Key="button-add-background" Color="#4caef5"/>
+    <SolidColorBrush x:Key="button-add-background" Color="#1a1d87"/>
+
+    <SolidColorBrush x:Key="border-sidemenu-background" Color="#066b1c"/>
+    <SolidColorBrush x:Key="border-topbar-background" Color="#d9d9d9"/>   
+    
+    <SolidColorBrush x:Key="textblock-main-borderbrush" Color="#e07109"/>
 
     <SolidColorBrush x:Key="color-main" Color="#7ae7f5"/>
     <SolidColorBrush x:Key="color-main-dark" Color="#6393e0"/>
-    <SolidColorBrush x:Key="color-main-darker" Color="#436bab"/>
+    <SolidColorBrush x:Key="color-main-darker" Color="#5d89cf"/>
+    <SolidColorBrush x:Key="color-main-darkest" Color="#436bab"/>
 </ResourceDictionary>

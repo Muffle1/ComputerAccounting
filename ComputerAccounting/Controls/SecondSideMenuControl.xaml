@@ -5,8 +5,96 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ComputerAccounting"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="600" d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/MainDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <local:RoleConverter x:Key="RoleConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border Padding="15 0">
+        <StackPanel VerticalAlignment="Center">
+
+            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                       FontSize="22"
+                       Text="Профиль"/>
+
+            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                       Margin="0 10 0 0"
+                       Text="Смена логина"/>
+
+            <TextBox Style="{StaticResource TextBoxMainStyle}"
+                     Text="{Binding User.Login}"
+                     MaxLength="30"
+                     Margin="0"
+                     Tag="Введите новый логин"
+                     BorderBrush="{StaticResource border-sidemenu-background}"
+                     HorizontalContentAlignment="Center"/>
+
+            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                   Margin="0 5 0 0"
+                   Text="Смена пароля"/>
+
+            <TextBox Style="{StaticResource TextBoxMainStyle}"
+                     MaxLength="30"
+                     Margin="0"
+                     Tag="Введите новый пароль"
+                     BorderBrush="{StaticResource border-sidemenu-background}"
+                     HorizontalContentAlignment="Center"/>
+
+            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                       Margin="0 5 0 0"
+                       Text="Смена роли"/>
+
+            <ComboBox Style="{StaticResource ComboBoxAuthenticationStyle}"
+                      BorderBrush="{StaticResource border-sidemenu-background}"
+                      HorizontalContentAlignment="Center"
+                      ItemsSource="{Binding Roles}"
+                      SelectedItem="{Binding User.Role, Converter={StaticResource RoleConverter}}"/>
+
+            <Button Style="{StaticResource ButtonMainStyle}"
+                    Command="{Binding SaveUserInfoCommand}"
+                    Content="Сохранить данные"
+                    Foreground="White"
+                    Background="{StaticResource button-add-background}"
+                    HorizontalAlignment="Stretch"/>
+
+            <Separator Background="Black"
+                       Margin="0 10 0 0"/>
+
+            <Button Style="{StaticResource ButtonMainStyle}"
+                    Command="{Binding AddCabinetCommand}"
+                    Content="Конфигурация ПК"
+                    Foreground="White"
+                    Background="{StaticResource button-add-background}"
+                    HorizontalAlignment="Stretch"/>
+
+            <Separator Background="Black"
+                       Margin="0 10 0 0"/>
+
+            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                       Margin="0 5 0 0"
+                       Text="Формирование документов"/>
             
-    </Grid>
+            <Button Style="{StaticResource ButtonMainStyle}"
+                    Command="{Binding AddCabinetCommand}"
+                    Content="Паспорт лаборатории"
+                    Foreground="White"
+                    Background="{StaticResource button-add-background}"
+                    HorizontalAlignment="Stretch"/>
+
+            <Button Style="{StaticResource ButtonMainStyle}"
+                    Command="{Binding AddCabinetCommand}"
+                    Content="Полная информация"
+                    Foreground="White"
+                    Background="{StaticResource button-add-background}"
+                    HorizontalAlignment="Stretch"/>
+
+        </StackPanel>
+    </Border>
 </UserControl>

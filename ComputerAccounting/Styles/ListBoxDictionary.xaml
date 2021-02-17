@@ -41,11 +41,10 @@
     <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
     
     <Style x:Key="ListBoxSideMenuItemStyle" TargetType="{x:Type ListBoxItem}">
-        
+
         <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="Padding" Value="10 5"/>
+        <Setter Property="Padding" Value="5"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Margin" Value="10 0"/>
 
         <Setter Property="Template">
             <Setter.Value>

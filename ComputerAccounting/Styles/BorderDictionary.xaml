@@ -24,7 +24,7 @@
 
     <Style x:Key="BorderGrayStyle" TargetType="Border" BasedOn="{StaticResource BorderBaseStyle}">
 
-        <Setter Property="Padding" Value="0 10"/>
+        <Setter Property="Padding" Value="20 10"/>
 
     </Style>
     

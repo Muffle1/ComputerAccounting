@@ -10,12 +10,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/TextBlockDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/TextBoxDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/ButtonDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/ComboBoxDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/BorderDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="/Styles/MainDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <local:RoleConverter x:Key="RoleConverter"/>
@@ -35,15 +30,19 @@
                            Text="Регистрация"
                            Foreground="{StaticResource textblock-login-foreground}"/>
 
-                <TextBox Style="{DynamicResource TextBoxAuthenticationStyle}"
+                <TextBox Style="{StaticResource TextBoxAuthenticationStyle}"
                          Text="{Binding User.Login}"
+                         MaxLength="30"
                          Tag="Логин"
-                         BorderBrush="{StaticResource inputfield-main-border}"
+                         BorderBrush="{StaticResource border-sidemenu-background}"
                          HorizontalContentAlignment="Center"/>
 
-                <local:BindablePasswordBox x:Name="Password"
-                        BorderBrush="{StaticResource inputfield-main-border}"
-                        Password="{Binding User.Password, ValidatesOnDataErrors=True}"/>
+                <PasswordBox Style="{StaticResource PasswordBoxAuthenticationStyle}"
+                             x:Name="Password"
+                             BorderBrush="{StaticResource border-sidemenu-background}"
+                             local:BindablePasswordBox.Password="{Binding User.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                             Tag="Пароль"
+                             HorizontalContentAlignment="Center"/>
 
                 <TextBlock Style="{StaticResource TextBlockAuthenticationStyle}"
                            Text="Роль"
@@ -52,14 +51,14 @@
                            Margin="0"/>
 
                 <ComboBox Style="{StaticResource ComboBoxAuthenticationStyle}"
-                          BorderBrush="{StaticResource inputfield-main-border}"
+                          BorderBrush="{StaticResource border-sidemenu-background}"
                           HorizontalContentAlignment="Center"
                           ItemsSource="{Binding Roles}"
-                          SelectedItem="{Binding User.Role, Converter={StaticResource RoleConverter}}">
-                </ComboBox>
+                          SelectedItem="{Binding User.Role, Converter={StaticResource RoleConverter}}"/>
 
                 <Button Style="{StaticResource ButtonAuthenticationStyle}"
                         Command="{Binding AuthorizationPageCommand}"
+                        CommandParameter="{Binding ElementName=Password, Path=(local:BindablePasswordBox.PasswordLength)}"
                         Content="Регистрация"
                         Foreground="{StaticResource button-login-foreground}"
                         Background="{StaticResource button-login-background}"
@@ -69,7 +68,7 @@
                 <Button Style="{StaticResource ButtonAuthenticationStyle}"
                         Command="{Binding BackCommand}"
                         Content="Вернуться"
-                        Padding="5 0"
+                        Padding="15 2"
                         FontSize="15"
                         Margin="20 2"
                         Foreground="{StaticResource button-login-foreground}"

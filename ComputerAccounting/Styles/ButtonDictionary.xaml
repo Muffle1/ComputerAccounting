@@ -6,7 +6,7 @@
 
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="10 5"/>
 
     </Style>
@@ -15,7 +15,7 @@
 
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontFamily" Value="Calibri"/>
-        <Setter Property="Margin" Value="20 10"/>
+        <Setter Property="Margin" Value="0 10"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -65,7 +65,9 @@
 
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-        <Setter Property="Margin" Value="10 2"/>
+        <Setter Property="Margin" Value="20 0"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="45"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -81,12 +83,8 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#c2daff"/>
+                            <Setter Property="Background" TargetName="border" Value="#e8e8e8"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="#a6a6a6"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#6ea7ff"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#595959"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
@@ -119,11 +117,11 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#f77b72"/>
+                            <Setter Property="Background" TargetName="border" Value="#13912f"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="#a6a6a6"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#8c352e"/>
+                            <Setter Property="Background" TargetName="border" Value="#0e6b23"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="#595959"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
@@ -138,11 +136,11 @@
 
     </Style>
 
-    <Style x:Key="ButtonAddStyle" TargetType="Button" BasedOn="{StaticResource ButtonBaseStyle}">
+    <Style x:Key="ButtonMainStyle" TargetType="Button" BasedOn="{StaticResource ButtonBaseStyle}">
 
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Margin" Value="15 0"/>
+        <Setter Property="Margin" Value="0 10"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -158,11 +156,11 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#6fbef7"/>
+                            <Setter Property="Background" TargetName="border" Value="#282cbd"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="#a6a6a6"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Background" TargetName="border" Value="#257ab8"/>
+                            <Setter Property="Background" TargetName="border" Value="#1a1c75"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="#595959"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">

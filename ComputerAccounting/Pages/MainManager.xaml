@@ -6,14 +6,12 @@
              xmlns:local="clr-namespace:ComputerAccounting"
              d:DataContext="{d:DesignInstance Type=local:MainManagerViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="1080" d:DesignWidth="1920"
-             Background="White">
+             d:DesignHeight="1080" d:DesignWidth="1920">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/ButtonDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="/Styles/MainDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type local:FirstSideMenuViewModel}">
@@ -39,18 +37,18 @@
         <Grid Grid.Column="0">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Grid Background="{StaticResource color-main-darker}">
+            <Grid Background="{StaticResource color-main-darkest}">
 
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             Grid.Row="0"
                             Margin="0 5 0 0">
 
-                    <Grid Margin="0 0 5 0">
+                    <Grid>
                         <Border Background="{StaticResource color-main-dark}"
                                 CornerRadius="10 0 10 0"
                                 Visibility="{Binding NameSideMenu, 
@@ -62,26 +60,26 @@
                                 Command="{Binding SwitchControlCommand}"
                                 CommandParameter="{x:Static local:NameSideMenu.FirstMenu}"
                                 Content="&#xE770;"
-                                Foreground="{StaticResource button-login-foreground}"
-                                Background="{StaticResource button-login-background}"
+                                Foreground="Black"
+                                Background="{StaticResource border-topbar-background}"
                                 BorderBrush="{StaticResource gray-82}"
                                 HorizontalContentAlignment="Center"/>
                     </Grid>
 
-                    <Grid Margin="5 0 0 0">
+                    <Grid>
                         <Border Background="{StaticResource color-main-dark}"
                                 CornerRadius="0 10 0 10"
                                 Visibility="{Binding NameSideMenu, 
                                                      Converter={StaticResource SideMenuColorConverter}, 
                                                      ConverterParameter={x:Static local:NameSideMenu.SecondMenu},
                                                      UpdateSourceTrigger=PropertyChanged}"/>
-                        
+
                         <Button Style="{StaticResource ButtonTopBarStyle}"
                                     Command="{Binding SwitchControlCommand}"
                                     CommandParameter="{x:Static local:NameSideMenu.SecondMenu}"
                                     Content="&#xE77B;"
-                                    Foreground="{StaticResource button-login-foreground}"
-                                    Background="{StaticResource button-login-background}"
+                                    Foreground="Black"
+                                    Background="{StaticResource border-topbar-background}"
                                     BorderBrush="{StaticResource gray-82}"
                                     HorizontalContentAlignment="Center"/>
                     </Grid>
@@ -99,6 +97,19 @@
 
         </Grid>
 
-        <ContentControl Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+        <Grid Background="#d9d9d9" Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0"
+                        Background="{StaticResource color-main-darkest}"/>
+
+            <ContentControl Grid.Row="1"
+                            Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}"/>
+        
+        </Grid>
     </Grid>
 </UserControl>

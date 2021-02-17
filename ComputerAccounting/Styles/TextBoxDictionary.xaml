@@ -13,7 +13,7 @@
     <Style x:Key="TextBoxAuthenticationStyle" TargetType="TextBox" BasedOn="{StaticResource TextBoxBaseStyle}">
 
         <Setter Property="BorderThickness" Value="0 0 0 1.5"/>
-        <Setter Property="Margin" Value="20 10 20 0"/>
+        <Setter Property="Margin" Value="0 10 0 0"/>
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Padding" Value="10 5"/>
@@ -32,7 +32,9 @@
                 <ControlTemplate TargetType="{x:Type TextBox}">
 
                     <ControlTemplate.Resources>
-                        <local:HasValueConverter x:Key="HasValueConverter"/>
+                        <ResourceDictionary>
+                            <local:HasValueConverter x:Key="HasValueConverter"/>
+                        </ResourceDictionary>
                     </ControlTemplate.Resources>
 
                     <StackPanel>
@@ -77,7 +79,7 @@
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Visibility" Value="Collapsed"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ErrorContent, Converter={StaticResource ResourceKey=HasValueConverter}}" Value="True">
+                                            <DataTrigger Binding="{Binding ErrorContent, Converter={StaticResource HasValueConverter}}" Value="True">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -92,10 +94,10 @@
                             <Setter Property="Opacity" TargetName="border" Value="0.56"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="#18d64e"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="#13912f"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="#109135"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="#0e6b23"/>
                         </Trigger>
 
                         <DataTrigger Binding="{Binding Visibility, ElementName=Error}" Value="Visible">
@@ -110,7 +112,7 @@
     <Style x:Key="TextBoxMainStyle" TargetType="TextBox" BasedOn="{StaticResource TextBoxBaseStyle}">
 
         <Setter Property="BorderThickness" Value="1.5"/>
-        <Setter Property="Margin" Value="15 10 15 0"/>
+        <Setter Property="Margin" Value="0 10 0 0"/>
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Padding" Value="10 5"/>
@@ -189,10 +191,10 @@
                             <Setter Property="Opacity" TargetName="border" Value="0.56"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="#18d64e"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="#13912f"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="#109135"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="#0e6b23"/>
                         </Trigger>
 
                         <DataTrigger Binding="{Binding Visibility, ElementName=Error}" Value="Visible">

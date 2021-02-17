@@ -11,24 +11,21 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/TextBlockDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/TextBoxDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/ButtonDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/Colors.xaml"/>
-                <ResourceDictionary Source="/Styles/ListBoxDictionary.xaml"/>
+                <ResourceDictionary Source="/Styles/MainDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Margin="0 5">
+    <Border Padding="15 5">
+        <Grid>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="120"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="110"/>
+            </Grid.RowDefinitions>
 
 
-        <ListBox Style="{StaticResource ListBoxSideMenuStyle}"
+            <ListBox Style="{StaticResource ListBoxSideMenuStyle}"
                  ItemContainerStyle="{StaticResource ListBoxSideMenuItemStyle}"
                  Background="Transparent"
                  Grid.Row="0"
@@ -36,35 +33,36 @@
                  SelectedItem="{Binding SelectedCabinet}"
                  HorizontalContentAlignment="Stretch">
 
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <local:SideMenuItemControl/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <local:SideMenuItemControl/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
 
-        </ListBox> 
+            </ListBox>
 
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="50"/>
-            </Grid.RowDefinitions>
-            <TextBox Style="{StaticResource TextBoxMainStyle}"
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <TextBox Style="{StaticResource TextBoxMainStyle}"
                      Text="{Binding Cabinet.Title, UpdateSourceTrigger=PropertyChanged}"
                      Tag="Введите название кабинета"
                      MaxLength="30"
                      Grid.Row="0"
-                     BorderBrush="{StaticResource inputfield-main-border}"
+                     BorderBrush="{StaticResource border-sidemenu-background}"
                      HorizontalContentAlignment="Center"/>
 
-            <Button Style="{StaticResource ButtonAddStyle}"
+                <Button Style="{StaticResource ButtonMainStyle}"
                     Command="{Binding AddCabinetCommand}"
                     Grid.Row="1"
                     Content="Добавить кабинет"
-                    Foreground="Black"
+                    Foreground="White"
                     Background="{StaticResource button-add-background}"
-                    BorderBrush="{StaticResource gray-82}"
                     HorizontalAlignment="Stretch"/>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </UserControl>

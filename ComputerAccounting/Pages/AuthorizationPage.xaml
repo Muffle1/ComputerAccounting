@@ -10,12 +10,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Styles/TextBlockDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/TextBoxDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/ButtonDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/ComboBoxDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/BorderDictionary.xaml"/>
-                <ResourceDictionary Source="/Styles/Colors.xaml"/>
+                <ResourceDictionary Source="/Styles/MainDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -36,18 +31,20 @@
 
                 <TextBox Style="{DynamicResource TextBoxAuthenticationStyle}"
                          Text="{Binding User.Login}"
-                         x:Name="Login"
                          Tag="Логин"
-                         BorderBrush="{StaticResource inputfield-main-border}"
+                         BorderBrush="{StaticResource border-sidemenu-background}"
                          HorizontalContentAlignment="Center"/>
-                
-                <local:BindablePasswordBox x:Name="Password"
-                        BorderBrush="{StaticResource inputfield-main-border}"
-                        Password="{Binding User.Password, ValidatesOnDataErrors=True}"/>
+
+                <PasswordBox Style="{StaticResource PasswordBoxAuthenticationStyle}"
+                             x:Name="Password"
+                             BorderBrush="{StaticResource border-sidemenu-background}"
+                             local:BindablePasswordBox.Password="{Binding User.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                             Tag="Пароль"
+                             HorizontalContentAlignment="Center"/>
 
                 <Button Style="{StaticResource ButtonAuthenticationStyle}"
                         Command="{Binding MainPageCommand}"
-                        x:Name="ButtonLogin"
+                        CommandParameter="{Binding ElementName=Password, Path=(local:BindablePasswordBox.PasswordLength)}"
                         Content="Авторизация"
                         Foreground="{StaticResource button-login-foreground}"
                         Background="{StaticResource button-login-background}"
@@ -56,9 +53,8 @@
 
                 <Button Style="{StaticResource ButtonAuthenticationStyle}"
                         Command="{Binding RegistrationPageCommand}"
-                        x:Name="ButtonRegistration"
                         Content="Регистрация"
-                        Padding="5 0"
+                        Padding="10 2"
                         FontSize="15"
                         Margin="20 2"
                         Foreground="{StaticResource button-login-foreground}"
