@@ -39,6 +39,7 @@
 
                 <PasswordBox Style="{StaticResource PasswordBoxAuthenticationStyle}"
                              x:Name="Password"
+                             MaxLength="30"
                              BorderBrush="{StaticResource border-sidemenu-background}"
                              local:BindablePasswordBox.Password="{Binding User.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
                              Tag="Пароль"

@@ -18,21 +18,21 @@ namespace ComputerAccounting
     {
         public int UserId { get; set; }
         public string Login { get; set; }
-        [NotMapped]
-        public int SymbolCount { get; private set; }
 
         private string _password;
         public string Password
         {
             get => _password;
-
-            set
-            {
-                _password = Hash(value);
-                SymbolCount = value.Length;
-            }
+            set => _password = Hash(value);
         }
 
         public Role Role { get; set; } = Role.Engineer;
+
+        public void CopyTo(User user)
+        {
+            user.UserId = UserId;
+            user.Login = Login;
+            user.Role = Role;
+        }
     }
 }

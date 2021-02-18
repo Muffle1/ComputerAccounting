@@ -34,10 +34,7 @@ namespace ComputerAccounting
                 return _mainPageCommand ??= new RelayCommand(async o =>
                 {
                     if (await CheckUser((int)o))
-                    {
-                        User.Password = "";
                         OnViewSwitched(new MainManagerViewModel(User), NameView.Manager);
-                    }
                 });
             }
         }
@@ -59,7 +56,11 @@ namespace ComputerAccounting
             {
                 using DataBaseHelper db = new DataBaseHelper();
                 if (db.Users.Any(u => (u.Login == User.Login) && (u.Password == User.Password)))
+                {
+                    User user = db.Users.Single(u => (u.Login == User.Login) && (u.Password == User.Password));
+                    user.CopyTo(User);
                     return true;
+                }
                 else
                     User.AddError(nameof(User.Login), "Неверно введён логин или пароль");
 

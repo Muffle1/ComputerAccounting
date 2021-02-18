@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ComputerAccounting
 {
-    class CabinetViewModel : BaseViewModel
+    public class CabinetViewModel : BaseViewModel
     {
     }
 }
