@@ -18,36 +18,21 @@ namespace ComputerAccounting
         public Cabinet Cabinet
         {
             get => _cabinet;
-
-            set
-            {
-                _cabinet = value;
-                OnPropertyChanged(nameof(Cabinet));
-            }
+            set => SetValue(ref _cabinet, value, nameof(Cabinet));
         }
 
         private Cabinet _selectedCabinet;
         public Cabinet SelectedCabinet
         {
             get => _selectedCabinet;
-
-            set
-            {
-                _selectedCabinet = value;
-                OnPropertyChanged(nameof(SelectedCabinet));
-            }
+            set => SetValue(ref _selectedCabinet, value, nameof(SelectedCabinet));
         }
 
         private ObservableCollection<Cabinet> _cabinets;
         public ObservableCollection<Cabinet> Cabinets
         {
             get => _cabinets;
-
-            set
-            {
-                _cabinets = value;
-                OnPropertyChanged(nameof(Cabinets));
-            }
+            set => SetValue(ref _cabinets, value, nameof(Cabinets));
         }
 
         private RelayCommand _addCabinetCommand;
@@ -57,7 +42,7 @@ namespace ComputerAccounting
             {
                 return _addCabinetCommand ??= new RelayCommand(async o =>
                 {
-                    if (await CheckCabinet())
+                    if (await CheckCabinetAsync())
                         Cabinet = new Cabinet();
                 });
             }
@@ -79,12 +64,18 @@ namespace ComputerAccounting
         public FirstSideMenuViewModel()
         {
             Cabinet = new Cabinet();
-
-            _db = new DataBaseHelper();
-            _db.Cabinets.Load();
-            Cabinets = _db.Cabinets.Local.ToObservableCollection();
-
+            LoadCabinetsAsync();
             PropertyChanged += FirstSideMenuViewModel_PropertyChanged;
+        }
+
+        private async void LoadCabinetsAsync()
+        {
+            await Task.Run(() =>
+            {
+                _db = new DataBaseHelper();
+                _db.Cabinets.LoadAsync();
+                Cabinets = _db.Cabinets.Local.ToObservableCollection();
+            });
         }
 
         private void FirstSideMenuViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -95,7 +86,7 @@ namespace ComputerAccounting
             }
         }
 
-        private async Task<bool> CheckCabinet()
+        private async Task<bool> CheckCabinetAsync()
         {
             Cabinet.ClearErrors(nameof(Cabinet.Title));
 

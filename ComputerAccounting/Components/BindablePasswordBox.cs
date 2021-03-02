@@ -26,16 +26,17 @@ namespace ComputerAccounting
 
         public static void SetPassword(DependencyObject d, string value) =>
             d.SetValue(PasswordProperty, value);
-        public static void SetPasswordLength(DependencyObject d, string value) =>
-            d.SetValue(PasswordLengthProperty, value.Length);
+        public static void SetPasswordLength(DependencyObject d, int value) =>
+            d.SetValue(PasswordLengthProperty, value);
 
         private static void OnPasswordChanged(
             DependencyObject d,
             DependencyPropertyChangedEventArgs e)
         {
             PasswordBox password = d as PasswordBox;
+
             if (password != null)
-                password.PasswordChanged -= PasswordChanged;
+                password.PasswordChanged += new RoutedEventHandler(PasswordChanged);
 
             if (e.NewValue != null)
             {
@@ -44,8 +45,8 @@ namespace ComputerAccounting
             }
             else
                 password.Password = string.Empty;
-            
-            password.PasswordChanged += new RoutedEventHandler(PasswordChanged);
+
+
         }
 
         static void PasswordChanged(object sender, RoutedEventArgs e)
@@ -55,7 +56,7 @@ namespace ComputerAccounting
             _updating = true;
 
             SetPassword(password, password.Password);
-            SetPasswordLength(password, password.Password);
+            SetPasswordLength(password, password.Password.Length);
 
             _updating = false;
         }

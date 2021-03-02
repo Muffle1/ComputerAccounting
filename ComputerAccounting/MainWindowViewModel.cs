@@ -10,11 +10,7 @@ namespace ComputerAccounting
         public IViewSwitcher CurrentManager
         {
             get => _currentManager;
-            set
-            {
-                _currentManager = value;
-                OnPropertyChanged("CurrentManager");
-            }
+            set => SetValue(ref _currentManager, value, nameof(CurrentManager));
         }
 
         public MainWindowViewModel()

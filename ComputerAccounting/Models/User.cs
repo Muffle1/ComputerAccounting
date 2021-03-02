@@ -28,11 +28,12 @@ namespace ComputerAccounting
 
         public Role Role { get; set; } = Role.Engineer;
 
-        public void CopyTo(User user)
+        public User Clone()
         {
-            user.UserId = UserId;
-            user.Login = Login;
-            user.Role = Role;
+            return new User { UserId = this.UserId, Login = this.Login, Role = this.Role };
         }
+
+        public void SaveWithoutHash(string password) =>
+            _password = password;
     }
 }

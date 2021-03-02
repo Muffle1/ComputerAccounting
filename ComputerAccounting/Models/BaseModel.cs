@@ -40,7 +40,12 @@ namespace ComputerAccounting
         public void OnErrorsChanged(string propertyName) =>
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
 
-        public string Hash(string input) =>
-            Convert.ToBase64String(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(input)));
+        public string Hash(string input)
+        {
+            if ((input == null) || (input == ""))
+                return "";
+            else
+                return Convert.ToBase64String(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(input)));
+        }
     }
 }

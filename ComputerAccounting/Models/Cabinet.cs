@@ -8,18 +8,7 @@ namespace ComputerAccounting
     {
         public int CabinetId { get; set; }
         public static string Icon { get; set; } = "\uE7BE";
-
-        private string _title;
-        public string Title
-        {
-            get => _title;
-
-            set
-            {
-                _title = value;
-                OnPropertyChanged(nameof(Title));
-            }
-        }
+        public string Title { get; set; }
 
         //public override bool Equals(object otherCabinet)
         //{

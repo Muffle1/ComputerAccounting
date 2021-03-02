@@ -33,13 +33,13 @@ namespace ComputerAccounting
             {
                 return _mainPageCommand ??= new RelayCommand(async o =>
                 {
-                    if (await CheckUser((int)o))
+                    if (await CheckUserAsync((int)o))
                         OnViewSwitched(new MainManagerViewModel(User), NameView.Manager);
                 });
             }
         }
 
-        private async Task<bool> CheckUser(int symbolCount)
+        private async Task<bool> CheckUserAsync(int symbolCount)
         {
             User.ClearErrors(nameof(User.Login));
             User.ClearErrors(nameof(User.Password));
@@ -58,7 +58,7 @@ namespace ComputerAccounting
                 if (db.Users.Any(u => (u.Login == User.Login) && (u.Password == User.Password)))
                 {
                     User user = db.Users.Single(u => (u.Login == User.Login) && (u.Password == User.Password));
-                    user.CopyTo(User);
+                    User = user.Clone();
                     return true;
                 }
                 else

@@ -165,7 +165,7 @@
 
                         <Grid DataContext="{TemplateBinding Validation.Errors}" x:Name="ErrorGrid" Height="20">
                             <TextBlock Foreground="Red"
-                                       FontSize="15"
+                                       FontSize="10"
                                        x:Name="Error"
                                        Text="{Binding ErrorContent}" 
                                        Padding="0 5"
@@ -176,7 +176,7 @@
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Visibility" Value="Collapsed"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding ErrorContent, Converter={StaticResource ResourceKey=HasValueConverter}}" Value="True">
+                                            <DataTrigger Binding="{Binding ErrorContent, Converter={StaticResource HasValueConverter}}" Value="True">
                                                 <Setter Property="Visibility" Value="Visible"/>
                                             </DataTrigger>
                                         </Style.Triggers>

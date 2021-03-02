@@ -157,11 +157,9 @@
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Background" TargetName="border" Value="#282cbd"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#a6a6a6"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Background" TargetName="border" Value="#1a1c75"/>
-                            <Setter Property="BorderBrush" TargetName="border" Value="#595959"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>

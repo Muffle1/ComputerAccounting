@@ -16,7 +16,7 @@ namespace ComputerAccounting
             if (value != null)
                 return EnumHelper.GetValueFromDescription<Role>(value.ToString());
             else
-                return "";
+                return Role.Engineer;
         }
     }
 }

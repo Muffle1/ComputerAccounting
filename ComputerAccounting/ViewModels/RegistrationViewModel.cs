@@ -25,7 +25,7 @@ namespace ComputerAccounting
             {
                 return _authorizationPageCommand ??= new RelayCommand(async o =>
                     {
-                        if (await CheckUser((int)o))
+                        if (await CheckUserAsync((int)o))
                             OnViewSwitched(new AuthorizationViewModel(), NameView.Page);
                     });
             }
@@ -43,7 +43,7 @@ namespace ComputerAccounting
             }
         }
 
-        private async Task<bool> CheckUser(int symbolCount)
+        private async Task<bool> CheckUserAsync(int symbolCount)
         {
             User.ClearErrors(nameof(User.Login));
             User.ClearErrors(nameof(User.Password));

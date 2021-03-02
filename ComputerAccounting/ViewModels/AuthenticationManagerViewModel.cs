@@ -13,11 +13,7 @@ namespace ComputerAccounting
         public IViewSwitcher CurrentPage
         {
             get => _currentPage;
-            set
-            {
-                _currentPage = value;
-                OnPropertyChanged("CurrentPage");
-            }
+            set => SetValue(ref _currentPage, value, nameof(CurrentPage));
         }
 
         public AuthenticationManagerViewModel()

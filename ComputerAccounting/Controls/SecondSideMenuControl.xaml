@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ComputerAccounting"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="400">
+             d:DesignHeight="700" d:DesignWidth="400">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -14,6 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <local:RoleConverter x:Key="RoleConverter"/>
+            <local:BorderSizeConverter x:Key="BorderSizeConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -25,11 +26,15 @@
                        Text="Профиль"/>
 
             <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                       FontSize="22"
+                       Text="{Binding Login}"/>
+
+            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                        Margin="0 10 0 0"
                        Text="Смена логина"/>
 
             <TextBox Style="{StaticResource TextBoxMainStyle}"
-                     Text="{Binding User.Login}"
+                     Text="{Binding User.Login, UpdateSourceTrigger=PropertyChanged}"
                      MaxLength="30"
                      Margin="0"
                      Tag="Введите новый логин"
@@ -56,45 +61,58 @@
                       BorderBrush="{StaticResource border-sidemenu-background}"
                       HorizontalContentAlignment="Center"
                       ItemsSource="{Binding Roles}"
-                      SelectedItem="{Binding User.Role, Converter={StaticResource RoleConverter}}"/>
+                      SelectedItem="{Binding User.Role, Converter={StaticResource RoleConverter}, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Button Style="{StaticResource ButtonMainStyle}"
                     Command="{Binding SaveUserInfoCommand}"
                     CommandParameter="{Binding ElementName=Password, Path=(local:BindablePasswordBox.PasswordLength)}"
                     Content="Сохранить данные"
                     Foreground="White"
-                    Background="{StaticResource button-add-background}"
+                    Background="{StaticResource button-sidemenu-background}"
                     HorizontalAlignment="Stretch"/>
 
             <Separator Background="Black"
-                       Margin="0 10 0 0"/>
+                       Margin="0 10"/>
 
-            <Button Style="{StaticResource ButtonMainStyle}"
-                    Command="{Binding AddCabinetCommand}"
-                    Content="Конфигурация ПК"
-                    Foreground="White"
-                    Background="{StaticResource button-add-background}"
-                    HorizontalAlignment="Stretch"/>
+            <Grid Margin="0 10">
+                <Border Background="{StaticResource button-sidemenu-borderbrush}"
+                        Visibility="{Binding ProfileViewModel, Converter={StaticResource BorderSizeConverter}, ConverterParameter=ComputerConfigControl, UpdateSourceTrigger=PropertyChanged}"
+                        CornerRadius="10"/>
+
+                <Button Style="{StaticResource ButtonMainStyle}"
+                        Command="{Binding OpenControlCommand}"
+                        CommandParameter="ComputerConfigControl"
+                        Content="Конфигурация ПК"
+                        Foreground="White"
+                        Margin="3"
+                        Background="{StaticResource button-sidemenu-background}"
+                        HorizontalAlignment="Stretch"/>
+
+            </Grid>
 
             <Separator Background="Black"
-                       Margin="0 10 0 0"/>
+                       Margin="0 10"/>
 
             <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                        Margin="0 5 0 0"
                        Text="Формирование документов"/>
-            
+
             <Button Style="{StaticResource ButtonMainStyle}"
-                    Command="{Binding AddCabinetCommand}"
+                    Command="{Binding OpenControlCommand}"
+                    CommandParameter="LaboratoryInfoControl"
                     Content="Паспорт лаборатории"
                     Foreground="White"
-                    Background="{StaticResource button-add-background}"
+                    BorderBrush="{StaticResource button-sidemenu-borderbrush}"
+                    Background="{StaticResource button-sidemenu-background}"
                     HorizontalAlignment="Stretch"/>
 
             <Button Style="{StaticResource ButtonMainStyle}"
-                    Command="{Binding AddCabinetCommand}"
+                    Command="{Binding OpenControlCommand}"
+                    CommandParameter="FullInfoControl"
                     Content="Полная информация"
                     Foreground="White"
-                    Background="{StaticResource button-add-background}"
+                    BorderBrush="{StaticResource button-sidemenu-borderbrush}"
+                    Background="{StaticResource button-sidemenu-background}"
                     HorizontalAlignment="Stretch"/>
 
             <Separator Background="Black"
@@ -104,7 +122,7 @@
                     Command="{Binding ExitCommand}"
                     Content="Выход"
                     Foreground="White"
-                    Background="{StaticResource button-add-background}"
+                    Background="{StaticResource button-sidemenu-background}"
                     HorizontalAlignment="Stretch"/>
 
         </StackPanel>

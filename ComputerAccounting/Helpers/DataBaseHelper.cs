@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComputerAccounting
 {
-    public class DataBaseHelper : DbContext, IDisposable
+    public class DataBaseHelper : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Cabinet> Cabinets { get; set; }

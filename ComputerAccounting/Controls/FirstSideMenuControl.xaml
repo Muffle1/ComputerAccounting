@@ -60,7 +60,7 @@
                     Grid.Row="1"
                     Content="Добавить кабинет"
                     Foreground="White"
-                    Background="{StaticResource button-add-background}"
+                    Background="{StaticResource button-sidemenu-background}"
                     HorizontalAlignment="Stretch"/>
             </Grid>
         </Grid>

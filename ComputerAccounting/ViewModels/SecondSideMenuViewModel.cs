@@ -8,29 +8,49 @@ namespace ComputerAccounting
 {
     public class SecondSideMenuViewModel : BaseViewModel
     {
-        public User User { get; set; }
+        private User _user;
+        public User User
+        {
+            get => _user;
+            set => SetValue(ref _user, value, nameof(User));
+        }
+
+        private string _login;
+        public string Login
+        {
+            get => _login;
+            set => SetValue(ref _login, value, nameof(Login));
+        }
 
         public IEnumerable<string> Roles
         {
             get => EnumHelper.GetEnumDescriptions(new Role().GetType());
         }
-        
+
+        private ProfileViewModel _profileViewModel;
+        public ProfileViewModel ProfileViewModel
+        {
+            get => _profileViewModel;
+            set => SetValue(ref _profileViewModel, value, nameof(ProfileViewModel));
+        }
+
         public SecondSideMenuViewModel(User user)
         {
             User = user;
+            Login = User.Login;
+            User.Login = "";
         }
 
         private RelayCommand _saveUserInfoCommand;
         public RelayCommand SaveUserInfoCommand
         {
-            get
-            {
-                return _saveUserInfoCommand ??= new RelayCommand(async o =>
-                {
-                    await CheckUser((int)o);
-                        
-                });
-            }
+            get => _saveUserInfoCommand ??= new RelayCommand(async o => await CheckUserAsync((int)o));
+        }
+
+        private RelayCommand _openControlCommand;
+        public RelayCommand OpenControlCommand
+        {
+            get => _openControlCommand ??= new RelayCommand(o => OpenControl(o.ToString()));
         }
 
         private RelayCommand _exitCommand;
@@ -45,56 +65,73 @@ namespace ComputerAccounting
             }
         }
 
-        private async Task<bool> CheckUser(int symbolCount)
+        private void OpenControl(string controlName)
+        {
+            if (ProfileViewModel == null)
+                OnViewSwitched(ProfileViewModel = new ProfileViewModel(), NameView.Page);
+
+            if ((controlName == "ComputerConfigControl") && (ProfileViewModel.ComputerConfigControl == null))
+                ProfileViewModel.ComputerConfigControl = new ComputerConfigViewModel();
+            else if ((controlName == "ComputerConfigControl") && (ProfileViewModel.ComputerConfigControl != null))
+                ProfileViewModel.ComputerConfigControl = null;
+
+            if ((controlName == "LaboratoryInfoControl") && (ProfileViewModel.LaboratoryInfoControl == null))
+                ProfileViewModel.LaboratoryInfoControl = new ComputerConfigViewModel();
+            else if ((controlName == "LaboratoryInfoControl") && (ProfileViewModel.LaboratoryInfoControl != null))
+                ProfileViewModel.LaboratoryInfoControl = null;
+
+            if ((controlName == "FullInfoControl") && (ProfileViewModel.FullInfoControl == null))
+                ProfileViewModel.FullInfoControl = new ComputerConfigViewModel();
+            else if ((controlName == "FullInfoControl") && (ProfileViewModel.FullInfoControl != null))
+                ProfileViewModel.FullInfoControl = null;
+        }
+
+        private async Task<bool> CheckUserAsync(int symbolCount)
         {
             User.ClearErrors(nameof(User.Login));
             User.ClearErrors(nameof(User.Password));
 
-            if ((User.Login == null) || (User.Login.Length <= 5))
-                User.AddError(nameof(User.Login), "Логин должен быть больше 6 символов.");
-            else
+            return await Task.Run(() =>
             {
-                return await Task.Run(() =>
+                using DataBaseHelper db = new DataBaseHelper();
+                User user = db.Users.Single(u => u.UserId == User.UserId);
+
+                if (user != null)
                 {
-                    using DataBaseHelper db = new DataBaseHelper();
-                    User user = db.Users.Single(u => u.UserId == User.UserId);
-
-                    if (user != null)
+                    if ((user.Login != User.Login) && (!string.IsNullOrEmpty(User.Login)))
                     {
-                        user.Login = User.Login;
-                        db.SaveChanges();
-
-                        return true;
+                        if (User.Login.Length <= 5)
+                            User.AddError(nameof(User.Login), "Логин должен быть больше 6 символов.");
+                        else
+                            user.Login = Login = User.Login;
                     }
+                    else if ((user.Login == User.Login) && (!string.IsNullOrEmpty(User.Login)))
+                        User.AddError(nameof(User.Login), "Логин не должен совпадать с предыдущим паролем.");
 
-                    return false;
-                });
-            }
-
-            if ((User.Password == null) || (symbolCount <= 5))
-                User.AddError(nameof(User.Password), "Пароль должен быть больше 6 символов.");
-            else
-            {
-                return await Task.Run(() =>
-                {
-                    using DataBaseHelper db = new DataBaseHelper();
-                    User user = db.Users.Single(u => u.UserId == User.UserId);
-
-                    if (user != null)
+                    if ((user.Password != User.Password) && (!string.IsNullOrEmpty(User.Password)))
                     {
-                        user.Password = User.Password;
-                        db.SaveChanges();
-
-                        return true;
+                        if (symbolCount <= 5)
+                            User.AddError(nameof(User.Password), "Пароль должен быть больше 6 символов.");
+                        else
+                            user.SaveWithoutHash(User.Password);
                     }
+                    else if ((user.Password == User.Password) && (!string.IsNullOrEmpty(User.Password)))
+                        User.AddError(nameof(User.Password), "Пароль не должен совпадать с предыдущим паролем.");
 
-                    return false;
-                });
-            }
+                    if (user.Role != User.Role)
+                        user.Role = User.Role;
 
-            if (User.HasErrors) return false;
+                    if (User.HasErrors) return false;
 
-            return false;
+                    User = new User() { UserId = User.UserId, Role = User.Role };
+
+                    db.SaveChanges();
+
+                    return true;
+                }
+
+                return false;
+            });
         }
     }
 }

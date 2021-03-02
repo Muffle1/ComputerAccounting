@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputerAccounting
 {
@@ -16,34 +17,21 @@ namespace ComputerAccounting
         public IViewSwitcher SideMenu
         {
             get => _sideMenu;
-            set
-            {
-                _sideMenu = value;
-                OnPropertyChanged(nameof(SideMenu));
-            }
+            set => SetValue(ref _sideMenu, value, nameof(SideMenu));
         }
 
         private IViewSwitcher _currentPage;
         public IViewSwitcher CurrentPage
         {
             get => _currentPage;
-            set
-            {
-                _currentPage = value;
-                OnPropertyChanged(nameof(CurrentPage));
-            }
+            set => SetValue(ref _currentPage, value, nameof(CurrentPage));
         }
 
         private NameSideMenu _nameSideMenu;
         public NameSideMenu NameSideMenu
         {
             get => _nameSideMenu;
-
-            set
-            {
-                _nameSideMenu = value;
-                OnPropertyChanged(nameof(NameSideMenu));
-            }
+            set => SetValue(ref _nameSideMenu, value, nameof(NameSideMenu));
         }
 
         public User User { get; set; }

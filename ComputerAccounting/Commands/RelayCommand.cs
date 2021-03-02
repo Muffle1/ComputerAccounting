@@ -22,14 +22,10 @@ namespace ComputerAccounting
             _CanExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter)
-        {
-            return _CanExecute == null || _CanExecute(parameter);
-        }
+        public bool CanExecute(object parameter) => 
+            _CanExecute == null || _CanExecute(parameter);
 
-        public void Execute(object parameter)
-        {
+        public void Execute(object parameter) =>
             _Execute(parameter);
-        }
     }
 }
