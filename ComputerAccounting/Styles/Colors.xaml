@@ -4,6 +4,7 @@
 
     <SolidColorBrush x:Key="gray-82" Color="#828282"/>
     <SolidColorBrush x:Key="gray-db" Color="#dbdbdb"/>
+    <SolidColorBrush x:Key="gray-d9" Color="#d9d9d9"/>
 
     <SolidColorBrush x:Key="textblock-login-foreground" Color="#073169"/>
     <SolidColorBrush x:Key="textblock-sidemenu-foreground" Color="#d9d9d9"/>
@@ -11,12 +12,12 @@
     <SolidColorBrush x:Key="button-login-foreground" Color="#5c1b87"/>
     <SolidColorBrush x:Key="button-login-background" Color="#abccff"/>
     <SolidColorBrush x:Key="button-sidemenu-background" Color="#1a1d87"/>
-    <SolidColorBrush x:Key="button-sidemenu-borderbrush" Color="#121561"/>
+    <SolidColorBrush x:Key="button-sidemenu-borderbrush" Color="Black"/>
 
     <SolidColorBrush x:Key="border-sidemenu-background" Color="#066b1c"/>
     <SolidColorBrush x:Key="border-topbar-background" Color="#d9d9d9"/>   
     
-    <SolidColorBrush x:Key="textblock-main-borderbrush" Color="#e07109"/>
+    <SolidColorBrush x:Key="textbox-main-borderbrush" Color="#e07109"/>
 
     <SolidColorBrush x:Key="color-main" Color="#7ae7f5"/>
     <SolidColorBrush x:Key="color-main-dark" Color="#6393e0"/>

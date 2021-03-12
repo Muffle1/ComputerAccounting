@@ -5,8 +5,82 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ComputerAccounting"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="Aqua">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="600" d:DesignWidth="400">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/MainDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Border Padding="15 0"
+            Background="{StaticResource gray-d9}">
+
+        <StackPanel VerticalAlignment="Center">
+
+            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                       Text="Конфигурация ПК"/>
+
+            <TextBox Style="{StaticResource TextBoxMainStyle}"
+                     MaxLength="30"
+                     Tag="Наименование процессора"
+                     BorderBrush="{StaticResource textbox-main-borderbrush}"
+                     HorizontalContentAlignment="Center"/>
+            <TextBox Style="{StaticResource TextBoxMainStyle}"
+                     MaxLength="30"
+                     Tag="Наименование видеокарты"
+                     BorderBrush="{StaticResource textbox-main-borderbrush}"
+                     HorizontalContentAlignment="Center"/>
+
+            <Grid VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                         MaxLength="30"
+                         Margin="0 0 5 0"
+                         Tag="Наименование ОЗУ"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"/>
+                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                         Grid.Column="1"
+                         MaxLength="30"
+                         Margin="5 0 0 0"
+                         Tag="Объём ОЗУ"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalAlignment="Stretch"
+                         HorizontalContentAlignment="Center"/>
+
+            </Grid>
+
+            <Grid VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                         MaxLength="30"
+                         Margin="0 0 5 0"
+                         Tag="Наименование ЖД"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"/>
+                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                         Grid.Column="1"
+                         MaxLength="30"
+                         Margin="5 0 0 0"
+                         Tag="Объём ЖД"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"/>
+
+            </Grid>
+
+        </StackPanel>
+        
+    </Border>
+    
 </UserControl>

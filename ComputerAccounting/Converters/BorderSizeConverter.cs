@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Windows;
 using System.Windows.Data;
 
@@ -13,30 +11,8 @@ namespace ComputerAccounting
         {
             if (value != null)
             {
-                if (parameter.ToString() == "ComputerConfigControl")
-                {
-                    if ((value as ProfileViewModel).ComputerConfigControl != null)
-                        return Visibility.Visible;
-                    else
-                        return Visibility.Hidden;
-                }
-
-                else if (parameter.ToString() == "LaboratoryInfoControl")
-                {
-                    if ((value as ProfileViewModel).LaboratoryInfoControl != null)
-                        return Visibility.Visible;
-                    else
-                        return Visibility.Hidden;
-                }
-
-                else if (parameter.ToString() == "FullInfoControl")
-                {
-                    if ((value as ProfileViewModel).FullInfoControl != null)
-                        return Visibility.Visible;
-                    else
-                        return Visibility.Hidden;
-                }
-
+                if (typeof(ProfileViewModel).GetProperty(parameter.ToString()).GetValue(value as ProfileViewModel) != null)
+                    return Visibility.Visible;
                 else
                     return Visibility.Hidden;
             }

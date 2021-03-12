@@ -84,6 +84,8 @@ namespace ComputerAccounting
                 ProfileViewModel.FullInfoControl = new ComputerConfigViewModel();
             else if ((controlName == "FullInfoControl") && (ProfileViewModel.FullInfoControl != null))
                 ProfileViewModel.FullInfoControl = null;
+
+            OnPropertyChanged(nameof(ProfileViewModel));
         }
 
         private async Task<bool> CheckUserAsync(int symbolCount)
