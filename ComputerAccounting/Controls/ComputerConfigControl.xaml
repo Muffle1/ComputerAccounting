@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ComputerAccounting"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="400">
+             d:DesignHeight="864" d:DesignWidth="400">
     
     <UserControl.Resources>
         <ResourceDictionary>
@@ -18,69 +18,110 @@
     <Border Padding="15 0"
             Background="{StaticResource gray-d9}">
 
-        <StackPanel VerticalAlignment="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="380"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+            <StackPanel VerticalAlignment="Center">
+
+                <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                        Text="Конфигурация ПК"/>
 
-            <TextBox Style="{StaticResource TextBoxMainStyle}"
-                     MaxLength="30"
-                     Tag="Наименование процессора"
-                     BorderBrush="{StaticResource textbox-main-borderbrush}"
-                     HorizontalContentAlignment="Center"/>
-            <TextBox Style="{StaticResource TextBoxMainStyle}"
-                     MaxLength="30"
-                     Tag="Наименование видеокарты"
-                     BorderBrush="{StaticResource textbox-main-borderbrush}"
-                     HorizontalContentAlignment="Center"/>
-
-            <Grid VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                
                 <TextBox Style="{StaticResource TextBoxMainStyle}"
+                         Text="{Binding ComputerConfig.ConfigName}"
+                         MaxLength="30"
+                         Tag="Наименование конфигурации"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"/>
+                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                         Text="{Binding ComputerConfig.CPUName}"
+                         MaxLength="30"
+                         Tag="Наименование процессора"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"
+                         Margin="0"/>
+                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                         Text="{Binding ComputerConfig.GPUName}"
+                         MaxLength="30"
+                         Tag="Наименование видеокарты"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"
+                         Margin="0"/>
+
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Style="{StaticResource TextBoxMainStyle}"
+                             Text="{Binding ComputerConfig.RAMName}"
                          MaxLength="30"
                          Margin="0 0 5 0"
                          Tag="Наименование ОЗУ"
                          BorderBrush="{StaticResource textbox-main-borderbrush}"
                          HorizontalContentAlignment="Center"/>
-                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                    <TextBox Style="{StaticResource TextBoxMainStyle}"
+                             PreviewTextInput="TextBox_PreviewTextInput"
                          Grid.Column="1"
+                             Text="{Binding ComputerConfig.RAMCapacity, UpdateSourceTrigger=PropertyChanged}"
                          MaxLength="30"
                          Margin="5 0 0 0"
-                         Tag="Объём ОЗУ"
+                         Tag="Объём ОЗУ (в Мб)"
                          BorderBrush="{StaticResource textbox-main-borderbrush}"
                          HorizontalAlignment="Stretch"
                          HorizontalContentAlignment="Center"/>
 
-            </Grid>
+                </Grid>
 
-            <Grid VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                    <TextBox Style="{StaticResource TextBoxMainStyle}"
+                             Text="{Binding ComputerConfig.DiskName}"
                          MaxLength="30"
                          Margin="0 0 5 0"
                          Tag="Наименование ЖД"
                          BorderBrush="{StaticResource textbox-main-borderbrush}"
                          HorizontalContentAlignment="Center"/>
-                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                    <TextBox Style="{StaticResource TextBoxMainStyle}"
+                             PreviewTextInput="TextBox_PreviewTextInput"
                          Grid.Column="1"
+                             Text="{Binding ComputerConfig.DiskCapacity}"
                          MaxLength="30"
                          Margin="5 0 0 0"
-                         Tag="Объём ЖД"
+                         Tag="Объём ЖД (в Мб)"
                          BorderBrush="{StaticResource textbox-main-borderbrush}"
                          HorizontalContentAlignment="Center"/>
 
-            </Grid>
+                </Grid>
 
-        </StackPanel>
-        
-    </Border>
-    
+                <Button Style="{StaticResource ButtonMainStyle}"
+                        Command="{Binding AddComputerConfigCommand}"
+                        Content="Добавить"
+                        Foreground="White"
+                        Margin="0"
+                        Background="{StaticResource button-sidemenu-background}"
+                        HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <ListBox Grid.Row="1"
+                     Style="{StaticResource ListBoxSideMenuStyle}"
+                     ItemContainerStyle="{StaticResource ListBoxSideMenuItemStyle}"
+                     ItemsSource="{Binding ComputerConfigs}"
+                     Background="Transparent"
+                     HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <local:ConfigItemControl/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Border>    
 </UserControl>

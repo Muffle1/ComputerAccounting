@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ComputerAccounting
 {
@@ -19,5 +21,14 @@ namespace ComputerAccounting
         //{
         //    return base.GetHashCode();
         //}
+
+        public int GetCabinetNumber() =>
+            Convert.ToInt32(string.Join("", Title.Where(ch => char.IsDigit(ch))));
+
+        public bool ContainsNumber()
+        {
+            Regex numberRegex = new Regex(@"^\D*\s?\d*$", RegexOptions.IgnoreCase);
+            return numberRegex.IsMatch(Title);
+        }
     }
 }

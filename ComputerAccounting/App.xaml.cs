@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Windows;
 
 namespace ComputerAccounting
 {
@@ -7,6 +8,12 @@ namespace ComputerAccounting
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            InitializeComponent();
 
+            using var db = new DataBaseHelper();
+            db.Database.Migrate();
+        }
     }
 }

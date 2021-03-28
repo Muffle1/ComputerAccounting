@@ -34,15 +34,17 @@ namespace ComputerAccounting
                 return _mainPageCommand ??= new RelayCommand(async o =>
                 {
                     if (await CheckUserAsync((int)o))
-                        OnViewSwitched(new MainManagerViewModel(User), NameView.Manager);
+                    {
+                        MainWindowViewModel.CurrentUser = User;
+                        OnViewSwitched(new MainManagerViewModel(), NameView.Manager);
+                    }
                 });
             }
         }
 
         private async Task<bool> CheckUserAsync(int symbolCount)
         {
-            User.ClearErrors(nameof(User.Login));
-            User.ClearErrors(nameof(User.Password));
+            User.ClearErrors();
 
             if ((User.Login == null) || (User.Login.Length <= 5))
                 User.AddError(nameof(User.Login), "Логин должен быть больше 6 символов.");

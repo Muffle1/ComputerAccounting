@@ -14,18 +14,13 @@ using System.Windows.Shapes;
 namespace ComputerAccounting
 {
     /// <summary>
-    /// Логика взаимодействия для ComputerConfigControl.xaml
+    /// Логика взаимодействия для ConfigItemControl.xaml
     /// </summary>
-    public partial class ComputerConfigControl : UserControl
+    public partial class ConfigItemControl : UserControl
     {
-        public ComputerConfigControl()
+        public ConfigItemControl()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !(char.IsDigit(e.Text, 0));
         }
     }
 }

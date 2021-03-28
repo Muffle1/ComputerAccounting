@@ -34,9 +34,9 @@ namespace ComputerAccounting
             set => SetValue(ref _profileViewModel, value, nameof(ProfileViewModel));
         }
 
-        public SecondSideMenuViewModel(User user)
+        public SecondSideMenuViewModel()
         {
-            User = user;
+            User = MainWindowViewModel.CurrentUser;
             Login = User.Login;
             User.Login = "";
         }
@@ -90,8 +90,7 @@ namespace ComputerAccounting
 
         private async Task<bool> CheckUserAsync(int symbolCount)
         {
-            User.ClearErrors(nameof(User.Login));
-            User.ClearErrors(nameof(User.Password));
+            User.ClearErrors();
 
             return await Task.Run(() =>
             {

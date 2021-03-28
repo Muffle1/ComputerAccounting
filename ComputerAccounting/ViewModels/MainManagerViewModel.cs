@@ -34,11 +34,8 @@ namespace ComputerAccounting
             set => SetValue(ref _nameSideMenu, value, nameof(NameSideMenu));
         }
 
-        public User User { get; set; }
-
-        public MainManagerViewModel(User user)
+        public MainManagerViewModel()
         {
-            User = user;
             NameSideMenu = NameSideMenu.FirstMenu;
             LoadView(new FirstSideMenuViewModel(), NameView.Control);
         }
@@ -78,7 +75,7 @@ namespace ComputerAccounting
                     if ((NameSideMenu)Enum.Parse(typeof(NameSideMenu), o.ToString()) == NameSideMenu.SecondMenu)
                     {
                         NameSideMenu = NameSideMenu.SecondMenu;
-                        LoadView(new SecondSideMenuViewModel(User), NameView.Control);
+                        LoadView(new SecondSideMenuViewModel(), NameView.Control);
                     }
                 });
             }

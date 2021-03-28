@@ -11,7 +11,7 @@ namespace ComputerAccounting
 {
     public class BaseModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
-        public readonly Dictionary<string, List<string>> _propertyErrors = new Dictionary<string, List<string>>();
+        private readonly Dictionary<string, List<string>> _propertyErrors = new Dictionary<string, List<string>>();
 
         public bool HasErrors => _propertyErrors.Any();
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
@@ -28,10 +28,16 @@ namespace ComputerAccounting
             OnErrorsChanged(propertyName);
         }
 
-        public void ClearErrors(string propertyName)
+        public bool HasError(string propertyName) => _propertyErrors.Any(p => p.Key == propertyName);
+
+        public void ClearErrors()
         {
-            if (_propertyErrors.Remove(propertyName))
+            foreach (var error in _propertyErrors)
+            {
+                string propertyName = error.Key;
+                _propertyErrors.Remove(propertyName);
                 OnErrorsChanged(propertyName);
+            }
         }
 
         public void OnPropertyChanged([CallerMemberName] string prop = "") =>
@@ -39,6 +45,7 @@ namespace ComputerAccounting
 
         public void OnErrorsChanged(string propertyName) =>
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+
 
         public string Hash(string input)
         {

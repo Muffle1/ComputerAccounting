@@ -12,8 +12,6 @@ namespace ComputerAccounting
 {
     public class FirstSideMenuViewModel : BaseViewModel
     {
-        private DataBaseHelper _db;
-
         private Cabinet _cabinet;
         public Cabinet Cabinet
         {
@@ -28,8 +26,8 @@ namespace ComputerAccounting
             set => SetValue(ref _selectedCabinet, value, nameof(SelectedCabinet));
         }
 
-        private ObservableCollection<Cabinet> _cabinets;
-        public ObservableCollection<Cabinet> Cabinets
+        private List<Cabinet> _cabinets;
+        public List<Cabinet> Cabinets
         {
             get => _cabinets;
             set => SetValue(ref _cabinets, value, nameof(Cabinets));
@@ -55,8 +53,10 @@ namespace ComputerAccounting
             {
                 return _deleteCabinetCommand ??= new RelayCommand(o =>
                 {
-                    _db.Remove(_db.Cabinets.Single(x => x.CabinetId == Convert.ToInt32(o)));
-                    _db.SaveChanges();
+                    using DataBaseHelper db = new DataBaseHelper();
+                    db.Remove(db.Cabinets.Single(x => x.CabinetId == Convert.ToInt32(o)));
+                    db.SaveChanges();
+                    Cabinets = db.Cabinets.ToList().OrderBy(c => c.GetCabinetNumber()).ToList();
                 });
             }
         }
@@ -72,9 +72,8 @@ namespace ComputerAccounting
         {
             await Task.Run(() =>
             {
-                _db = new DataBaseHelper();
-                _db.Cabinets.LoadAsync();
-                Cabinets = _db.Cabinets.Local.ToObservableCollection();
+                using DataBaseHelper db = new DataBaseHelper();
+                Cabinets = db.Cabinets.ToList().OrderBy(c => c.GetCabinetNumber()).ToList();
             });
         }
 
@@ -82,27 +81,32 @@ namespace ComputerAccounting
         {
             if (e.PropertyName == nameof(SelectedCabinet))
             {
-
+                // TODO: Смена окна кабинета
             }
         }
 
         private async Task<bool> CheckCabinetAsync()
         {
-            Cabinet.ClearErrors(nameof(Cabinet.Title));
+            Cabinet.ClearErrors();
 
             if (Cabinet.Title == null)
                 Cabinet.AddError(nameof(Cabinet.Title), "Введите название.");
-
+            else if (!Cabinet.ContainsNumber())
+                Cabinet.AddError(nameof(Cabinet.Title), "Название должно оканчиваться на число.");
+            else if (Cabinets.Any(c => c.GetCabinetNumber() == Cabinet.GetCabinetNumber()))
+                Cabinet.AddError(nameof(Cabinet.Title), "Кабинет с таким номером уже есть.");
             if (Cabinet.HasErrors) return false;
 
             return await Task.Run(() =>
             {
-                if (!_db.Cabinets.Any(c => c.Title == Cabinet.Title))
+                using DataBaseHelper db = new DataBaseHelper();
+                if (!db.Cabinets.Any(c => c.Title == Cabinet.Title))
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        _db.Cabinets.Add(Cabinet);
-                        _db.SaveChanges();
+                        db.Cabinets.Add(Cabinet);
+                        db.SaveChanges();
+                        Cabinets = db.Cabinets.ToList().OrderBy(c => c.GetCabinetNumber()).ToList();
                     });
 
                     return true;

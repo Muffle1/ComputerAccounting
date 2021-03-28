@@ -163,13 +163,14 @@
                             </TextBlock>
                         </Grid>
 
-                        <Grid DataContext="{TemplateBinding Validation.Errors}" x:Name="ErrorGrid" Height="20">
+                        <Grid DataContext="{TemplateBinding Validation.Errors}" x:Name="ErrorGrid" Height="25">
                             <TextBlock Foreground="Red"
                                        FontSize="10"
                                        x:Name="Error"
                                        Text="{Binding ErrorContent}" 
                                        Padding="0 5"
                                        VerticalAlignment="Center"
+                                       TextWrapping="Wrap"
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
 
                                 <TextBlock.Style>

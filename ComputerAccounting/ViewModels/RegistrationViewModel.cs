@@ -45,8 +45,7 @@ namespace ComputerAccounting
 
         private async Task<bool> CheckUserAsync(int symbolCount)
         {
-            User.ClearErrors(nameof(User.Login));
-            User.ClearErrors(nameof(User.Password));
+            User.ClearErrors();
 
             if ((User.Login == null) || (User.Login.Length <= 5))
                 User.AddError(nameof(User.Login), "Логин должен быть больше 6 символов.");

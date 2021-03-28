@@ -4,8 +4,10 @@ using System.Text;
 
 namespace ComputerAccounting
 {
-    class MainWindowViewModel : BaseViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
+        public static User CurrentUser { get; set; }
+
         private IViewSwitcher _currentManager;
         public IViewSwitcher CurrentManager
         {
