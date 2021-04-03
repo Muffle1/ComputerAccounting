@@ -7,7 +7,7 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              MaxWidth="350"
-             d:DesignHeight="50" d:DesignWidth="350">
+             d:DesignHeight="50" d:DesignWidth="220">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -27,7 +27,7 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="130"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
@@ -39,6 +39,7 @@
 
             <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                        Text="{Binding Title}"
+                       TextTrimming="CharacterEllipsis"
                        Grid.Column="1"
                        HorizontalAlignment="Left"
                        Foreground="{StaticResource textblock-sidemenu-foreground}"/>

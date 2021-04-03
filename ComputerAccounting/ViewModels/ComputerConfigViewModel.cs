@@ -10,6 +10,13 @@ namespace ComputerAccounting
 {
     public class ComputerConfigViewModel : BaseViewModel
     {
+        private bool _isEditing;
+        public bool IsEditing
+        {
+            get => _isEditing;
+            set => SetValue(ref _isEditing, value, nameof(IsEditing));
+        }
+
         private ComputerConfig _computerConfig;
         public ComputerConfig ComputerConfig
         {
@@ -28,6 +35,7 @@ namespace ComputerAccounting
         {
             ComputerConfig = new ComputerConfig();
             LoadConfigsAsync();
+            IsEditing = false;
         }
 
         private async void LoadConfigsAsync()
@@ -93,7 +101,8 @@ namespace ComputerAccounting
             {
                 return _editConfigCommand ??= new RelayCommand(o =>
                 {
-
+                    IsEditing = true;
+                    ComputerConfig = new ComputerConfig();
                 });
             }
         }
@@ -105,7 +114,10 @@ namespace ComputerAccounting
             {
                 return _deleteConfigCommand ??= new RelayCommand(o =>
                 {
-
+                    using DataBaseHelper db = new DataBaseHelper();
+                    db.Remove(db.ComputerConfigs.Single(x => x.ComputerConfigId == Convert.ToInt32(o)));
+                    db.SaveChanges();
+                    ComputerConfigs = db.ComputerConfigs.ToList();
                 });
             }
         }

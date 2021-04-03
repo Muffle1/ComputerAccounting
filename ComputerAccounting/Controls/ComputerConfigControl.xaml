@@ -12,6 +12,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/MainDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <local:IsEditingConverter x:Key="IsEditingConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     
@@ -29,20 +31,20 @@
                 <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                        Text="Конфигурация ПК"/>
 
-                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                <TextBox Style="{StaticResource TextBoxConfigStyle}"
                          Text="{Binding ComputerConfig.ConfigName}"
                          MaxLength="30"
                          Tag="Наименование конфигурации"
                          BorderBrush="{StaticResource textbox-main-borderbrush}"
                          HorizontalContentAlignment="Center"/>
-                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                <TextBox Style="{StaticResource TextBoxConfigStyle}"
                          Text="{Binding ComputerConfig.CPUName}"
                          MaxLength="30"
                          Tag="Наименование процессора"
                          BorderBrush="{StaticResource textbox-main-borderbrush}"
                          HorizontalContentAlignment="Center"
                          Margin="0"/>
-                <TextBox Style="{StaticResource TextBoxMainStyle}"
+                <TextBox Style="{StaticResource TextBoxConfigStyle}"
                          Text="{Binding ComputerConfig.GPUName}"
                          MaxLength="30"
                          Tag="Наименование видеокарты"
@@ -56,14 +58,14 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Style="{StaticResource TextBoxMainStyle}"
+                    <TextBox Style="{StaticResource TextBoxConfigStyle}"
                              Text="{Binding ComputerConfig.RAMName}"
                          MaxLength="30"
                          Margin="0 0 5 0"
                          Tag="Наименование ОЗУ"
                          BorderBrush="{StaticResource textbox-main-borderbrush}"
                          HorizontalContentAlignment="Center"/>
-                    <TextBox Style="{StaticResource TextBoxMainStyle}"
+                    <TextBox Style="{StaticResource TextBoxConfigStyle}"
                              PreviewTextInput="TextBox_PreviewTextInput"
                          Grid.Column="1"
                              Text="{Binding ComputerConfig.RAMCapacity, UpdateSourceTrigger=PropertyChanged}"
@@ -82,14 +84,14 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox Style="{StaticResource TextBoxMainStyle}"
+                    <TextBox Style="{StaticResource TextBoxConfigStyle}"
                              Text="{Binding ComputerConfig.DiskName}"
                          MaxLength="30"
                          Margin="0 0 5 0"
                          Tag="Наименование ЖД"
                          BorderBrush="{StaticResource textbox-main-borderbrush}"
                          HorizontalContentAlignment="Center"/>
-                    <TextBox Style="{StaticResource TextBoxMainStyle}"
+                    <TextBox Style="{StaticResource TextBoxConfigStyle}"
                              PreviewTextInput="TextBox_PreviewTextInput"
                          Grid.Column="1"
                              Text="{Binding ComputerConfig.DiskCapacity}"
@@ -102,8 +104,10 @@
                 </Grid>
 
                 <Button Style="{StaticResource ButtonMainStyle}"
+                        x:Name="ConfigButton"
                         Command="{Binding AddComputerConfigCommand}"
-                        Content="Добавить"
+                        CommandParameter="{Binding ElementName=ConfigButton, Path=Content}"
+                        Content="{Binding IsEditing, Converter={StaticResource IsEditingConverter}, UpdateSourceTrigger=PropertyChanged}"
                         Foreground="White"
                         Margin="0"
                         Background="{StaticResource button-sidemenu-background}"
