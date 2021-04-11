@@ -1,0 +1,222 @@
+﻿<UserControl x:Class="ComputerAccounting.ComputerItemControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ComputerAccounting"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="900">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/MainDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border HorizontalAlignment="Stretch"
+            Padding="10 5"
+            CornerRadius="10"
+            Background="{StaticResource border-sidemenu-background}"
+            BorderBrush="{StaticResource gray-82}">
+
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                       Text="{Binding InventoryNumber}"
+                       Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+
+                <Button Style="{StaticResource ButtonEditStyle}"
+                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.EditComputerCommand}"
+                    CommandParameter="{Binding ComputerId}"
+                    Content="Edit"
+                    Grid.Column="1"
+                    Background="Transparent"
+                    BorderBrush="{StaticResource gray-82}"/>
+
+                <Button Style="{StaticResource ButtonDeleteStyle}"
+                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.DeleteComputerCommand}"
+                    CommandParameter="{Binding ComputerId}"
+                    Content="&#xE711;"
+                    Grid.Column="2"
+                    Background="Transparent"
+                    BorderBrush="{StaticResource gray-82}"/>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                               FontSize="15"
+                           Text="ЦП"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                        <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                       TextAlignment="Left"
+                               FontSize="15"
+                               TextTrimming="CharacterEllipsis"
+                               Grid.Column="1"
+                           Text="{Binding CPUName}"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                               FontSize="15"
+                           Text="ГП"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                        <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                       TextAlignment="Left"
+                               FontSize="15"
+                               TextTrimming="CharacterEllipsis"
+                               Grid.Column="1"
+                           Text="{Binding GPUName}"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35"/>
+                                <ColumnDefinition Width="120"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                   FontSize="15"
+                           Text="ОЗУ"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                           TextAlignment="Left"
+                                   FontSize="15"
+                                   Grid.Column="1"
+                                   TextTrimming="CharacterEllipsis"
+                                   Text="{Binding RAMName}"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                   FontSize="15"
+                           Text="Объем (В Мб)"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                           TextAlignment="Left"
+                                   FontSize="15"
+                           Grid.Column="1"
+                                   TextTrimming="CharacterEllipsis"
+                                   Text="{Binding RAMCapacity}"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="1"
+                              Grid.Column="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35"/>
+                                <ColumnDefinition Width="120"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                   FontSize="15"
+                           Text="ЖД"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                           TextAlignment="Left"
+                                   FontSize="15"
+                           Grid.Column="1"
+                                   TextTrimming="CharacterEllipsis"
+                                   Text="{Binding DiskName}"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                   FontSize="15"
+                           Text="Объем (В Мб)"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                           TextAlignment="Left"
+                                   FontSize="15"
+                           Grid.Column="1"
+                                   TextTrimming="CharacterEllipsis"
+                                   Text="{Binding DiskCapacity}"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Button Style="{StaticResource ButtonMainStyle}"
+                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.SoftsViewCommand}"
+                        CommandParameter="{Binding ComputerId}"
+                        Grid.Column="1"
+                        Foreground="White"
+                        Margin="5 0"
+                        Background="{StaticResource button-sidemenu-background}"
+                        VerticalAlignment="Center"
+                        FontSize="15">
+
+                    <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                               FontSize="15"
+                               TextWrapping="Wrap"
+                           Text="Просмотреть список приложений"
+                           Foreground="{StaticResource textblock-sidemenu-foreground}"/>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

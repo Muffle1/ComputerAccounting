@@ -10,16 +10,25 @@
     <Compile Update="Controls\ComputerConfigControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\ComputerItemControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\ConfigItemControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Controls\FirstSideMenuControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\LaboratoryInfoControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\SecondSideMenuControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Controls\SideMenuItemControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\UseConfigItemControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\AuthenticationManager.xaml.cs">
@@ -45,16 +54,25 @@
     <Page Update="Controls\ComputerConfigControl.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Controls\ComputerItemControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Controls\ConfigItemControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Controls\FirstSideMenuControl.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Controls\LaboratoryInfoControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Controls\SecondSideMenuControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Controls\SideMenuItemControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\UseConfigItemControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">

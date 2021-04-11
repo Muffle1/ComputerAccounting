@@ -17,8 +17,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     
-    <Border Padding="15 0"
-            Background="{StaticResource gray-d9}">
+    <Border Padding="15 0">
 
         <Grid>
             <Grid.RowDefinitions>
@@ -116,10 +115,11 @@
 
             <ListBox Grid.Row="1"
                      Style="{StaticResource ListBoxSideMenuStyle}"
-                     ItemContainerStyle="{StaticResource ListBoxSideMenuItemStyle}"
+                     ItemContainerStyle="{StaticResource ListBoxComputerConfigItemStyle}"
                      ItemsSource="{Binding ComputerConfigs}"
                      Background="Transparent"
-                     HorizontalContentAlignment="Stretch">
+                     HorizontalContentAlignment="Stretch"
+                     Margin="0 20">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <local:ConfigItemControl/>

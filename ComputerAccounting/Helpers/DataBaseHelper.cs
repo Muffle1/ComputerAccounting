@@ -11,6 +11,7 @@ namespace ComputerAccounting
         public DbSet<User> Users { get; set; }
         public DbSet<Cabinet> Cabinets { get; set; }
         public DbSet<ComputerConfig> ComputerConfigs { get; set; }
+        public DbSet<Computer> Computers { get; set; }
 
         public DataBaseHelper()
         {

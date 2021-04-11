@@ -76,7 +76,7 @@ namespace ComputerAccounting
                 ProfileViewModel.ComputerConfigControl = null;
 
             if ((controlName == "LaboratoryInfoControl") && (ProfileViewModel.LaboratoryInfoControl == null))
-                ProfileViewModel.LaboratoryInfoControl = new ComputerConfigViewModel();
+                ProfileViewModel.LaboratoryInfoControl = new LaboratoryInfoViewModel();
             else if ((controlName == "LaboratoryInfoControl") && (ProfileViewModel.LaboratoryInfoControl != null))
                 ProfileViewModel.LaboratoryInfoControl = null;
 

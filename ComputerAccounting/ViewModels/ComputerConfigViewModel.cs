@@ -57,7 +57,13 @@ namespace ComputerAccounting
                     if (IsConfigCorrect())
                     {
                         using DataBaseHelper db = new DataBaseHelper();
-                        db.ComputerConfigs.Add(ComputerConfig);
+                        if (!IsEditing)
+                            db.ComputerConfigs.Add(ComputerConfig);
+                        else
+                        {
+                            db.ComputerConfigs.Update(ComputerConfig);
+                            IsEditing = false;
+                        }
                         ComputerConfig = new ComputerConfig();
                         db.SaveChanges();
                         ComputerConfigs = db.ComputerConfigs.ToList();
@@ -69,12 +75,13 @@ namespace ComputerAccounting
         private bool IsConfigCorrect()
         {
             ComputerConfig.ClearErrors();
-            using DataBaseHelper db = new DataBaseHelper();
 
             if (string.IsNullOrEmpty(ComputerConfig.ConfigName))
                 ComputerConfig.AddError(nameof(ComputerConfig.ConfigName), "Наименование конфигурации необходимо заполнить");
-            else if (db.ComputerConfigs.Any(c => c.ConfigName == ComputerConfig.ConfigName))
+            else if ((new DataBaseHelper().ComputerConfigs.Any(c => c.ConfigName == ComputerConfig.ConfigName)) && (!IsEditing))
                 ComputerConfig.AddError(nameof(ComputerConfig.ConfigName), "Конфигурация с таким именем уже существует");
+            else if ((!new DataBaseHelper().ComputerConfigs.Any(c => c.ConfigName == ComputerConfig.ConfigName)) && (IsEditing))
+                ComputerConfig.AddError(nameof(ComputerConfig.ConfigName), "Конфигурации с таким именем не существует");
             if (string.IsNullOrEmpty(ComputerConfig.CPUName))
                 ComputerConfig.AddError(nameof(ComputerConfig.CPUName), "Наименование процессора необходимо заполнить");
             if (string.IsNullOrEmpty(ComputerConfig.GPUName))
@@ -102,7 +109,7 @@ namespace ComputerAccounting
                 return _editConfigCommand ??= new RelayCommand(o =>
                 {
                     IsEditing = true;
-                    ComputerConfig = new ComputerConfig();
+                    ComputerConfig = ComputerConfigs.SingleOrDefault(c => c.ComputerConfigId == Convert.ToInt32(o));
                 });
             }
         }
@@ -118,6 +125,8 @@ namespace ComputerAccounting
                     db.Remove(db.ComputerConfigs.Single(x => x.ComputerConfigId == Convert.ToInt32(o)));
                     db.SaveChanges();
                     ComputerConfigs = db.ComputerConfigs.ToList();
+                    ComputerConfig = new ComputerConfig();
+                    IsEditing = false;
                 });
             }
         }

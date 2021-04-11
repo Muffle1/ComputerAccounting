@@ -3,19 +3,434 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ComputerAccounting"
+             xmlns:local="clr-namespace:ComputerAccounting" 
+             d:DataContext="{d:DesignInstance Type=local:CabinetViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="900" d:DesignWidth="1300">
 
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/MainDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <local:IsEditingConverter x:Key="IsEditingConverter"/>
+            <local:VisibilityConverter x:Key="VisibilityConverter"/>
+            <local:HasItemsConverter x:Key="HasItemsConverter"/>
+            <local:SoftsConverter x:Key="SoftsConverter"/>
+            <local:OpenLockerConverter x:Key="OpenLockerConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
-    
-    <Border Background="White">
 
+    <Border Padding="10 5">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.6*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="0 0 25 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                           Text="Сменить название кабинета"
+                           Grid.ColumnSpan="2"
+                           Margin="0 5"/>
+
+                    <TextBox Style="{StaticResource TextBoxConfigStyle}"
+                         Text="{Binding Cabinet.Title}"
+                         Grid.Row="1"
+                         MaxLength="30"
+                         Margin="5 0"
+                         Tag="Название кабинета"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"/>
+
+                    <Button Style="{StaticResource ButtonMainStyle}"
+                        Command="{Binding EditCabinetCommand}"
+                        Content="Изменить"
+                        Grid.Row="2"
+                        Foreground="White"
+                        Padding="10 6.5"
+                        Margin="5 0"
+                        Background="{StaticResource button-sidemenu-background}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="5 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                       Text="Комплектация ПК"
+                               Grid.ColumnSpan="2"
+                           Margin="0 5"/>
+
+                    <TextBox Style="{StaticResource TextBoxConfigStyle}"
+                         Text="{Binding Computer.CPUName}"
+                         MaxLength="30"
+                             Grid.Row="1"
+                         Tag="Наименование процессора"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"
+                         Margin="0 0 5 0"/>
+
+                    <TextBox Style="{StaticResource TextBoxConfigStyle}"
+                         Text="{Binding Computer.GPUName}"
+                         MaxLength="30"
+                             Grid.Row="1"
+                             Grid.Column="1"
+                         Tag="Наименование видеокарты"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"
+                         Margin="5 0 0 0"/>
+
+                    <Grid VerticalAlignment="Center"
+                          Grid.Row="2"
+                          Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Style="{StaticResource TextBoxConfigStyle}"
+                             Text="{Binding Computer.RAMName}"
+                         MaxLength="30"
+                         Margin="0 0 5 0"
+                         Tag="Наименование ОЗУ"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"/>
+                        <TextBox Style="{StaticResource TextBoxConfigStyle}"
+                             
+                         Grid.Column="1"
+                             Text="{Binding Computer.RAMCapacity, UpdateSourceTrigger=PropertyChanged}"
+                         MaxLength="30"
+                         Margin="5 0 0 0"
+                         Tag="Объём ОЗУ (в Мб)"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalAlignment="Stretch"
+                         HorizontalContentAlignment="Center"/>
+
+                    </Grid>
+
+                    <Grid VerticalAlignment="Center"
+                          Grid.Row="3"
+                          Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Style="{StaticResource TextBoxConfigStyle}"
+                             Text="{Binding Computer.DiskName}"
+                         MaxLength="30"
+                         Margin="0 0 5 0"
+                         Tag="Наименование ЖД"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"/>
+                        <TextBox Style="{StaticResource TextBoxConfigStyle}"
+                         Grid.Column="1"
+                             Text="{Binding Computer.DiskCapacity}"
+                         MaxLength="30"
+                         Margin="5 0 0 0"
+                         Tag="Объём ЖД (в Мб)"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"/>
+
+                    </Grid>
+
+                    <Grid Grid.Row="4"
+                          Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Style="{StaticResource ButtonMainStyle}"
+                        x:Name="ComputerButton"
+                        Command="{Binding AddComputerCommand}"
+                        CommandParameter="{Binding ElementName=ComputerButton, Path=Content}"
+                        Content="{Binding IsEditing, Converter={StaticResource IsEditingConverter}, UpdateSourceTrigger=PropertyChanged}"
+                        Foreground="White"
+                        Margin="0 0 5 0"
+                        Background="{StaticResource button-sidemenu-background}"
+                        HorizontalAlignment="Stretch"/>
+
+                        <Button Style="{StaticResource ButtonMainStyle}"
+                        Command="{Binding UseComputerConfigCommand}"
+                        Content="Использовать конфигурацию"
+                                Grid.Column="1"
+                        Foreground="White"
+                        Margin="5 0 0 0"
+                        Background="{StaticResource button-sidemenu-background}"
+                        HorizontalAlignment="Stretch"
+                                Click="Button_Click"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                           Text="Софт"
+                           Grid.ColumnSpan="2"
+                           Margin="0 5"/>
+
+                    <TextBox Style="{StaticResource TextBoxConfigStyle}"
+                         Text="{Binding Soft.SoftName}"
+                         Grid.Row="1"
+                         MaxLength="50"
+                         Margin="5 0"
+                         Tag="Название софта"
+                         BorderBrush="{StaticResource textbox-main-borderbrush}"
+                         HorizontalContentAlignment="Center"/>
+
+                    <Button Style="{StaticResource ButtonMainStyle}"
+                        Command="{Binding AddSoftCommand}"
+                        Content="Добавить"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Foreground="White"
+                        Padding="10 6.5"
+                        Margin="5 0"
+                        Background="{StaticResource button-sidemenu-background}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"/>
+                </Grid>
+
+                <ListBox Grid.Row="1"
+                         Style="{StaticResource ListBoxSideMenuStyle}"
+                         ItemContainerStyle="{StaticResource ListBoxSideMenuItemStyle}"
+                         ItemsSource="{Binding Softs, UpdateSourceTrigger=PropertyChanged}"
+                         x:Name="SoftsList"
+                         Background="Transparent"
+                         HorizontalContentAlignment="Stretch">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                       Text="{Binding SoftName}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <Button Style="{StaticResource ButtonMainStyle}"
+                        Command="{Binding DeleteSoftCommand}"
+                        CommandParameter="{Binding ElementName=SoftsList, Path=SelectedItem}"
+                        Content="Удалить"
+                        Grid.Row="2"
+                        Foreground="White"
+                        Margin="5 0"
+                        Background="{StaticResource button-sidemenu-background}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center"/>
+            </Grid>
+
+            <ListBox Grid.Row="1"
+                     Grid.ColumnSpan="2"
+                     Margin="5 10"
+                     x:Name="ComputersList"
+                     Style="{StaticResource ListBoxSideMenuStyle}"
+                     ItemContainerStyle="{StaticResource ListBoxComputerConfigItemStyle}"
+                     ItemsSource="{Binding Computers}"
+                     Background="Transparent"
+                     HorizontalContentAlignment="Stretch">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <local:ComputerItemControl/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Grid HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Grid.RowSpan="2"
+                  Grid.ColumnSpan="3"
+                  Background="Transparent"
+                  MouseDown="ConfigPopup_MouseDown">
+                <Grid.Visibility>
+                    <MultiBinding Converter="{StaticResource OpenLockerConverter}">
+                        <Binding ElementName="ConfigPopup" Path="Visibility"/>
+                        <Binding ElementName="SoftPopup" Path="Visibility"/>
+                    </MultiBinding>
+                </Grid.Visibility>
+            </Grid>
+
+            <Border Background="{StaticResource gray-d9}"
+                    x:Name="ConfigPopup"
+                    Visibility="Collapsed"
+                    Grid.RowSpan="2"
+                    Grid.ColumnSpan="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="450"
+                    Height="600"
+                    Padding="10 5"
+                    CornerRadius="15"
+                    BorderThickness="5"
+                    BorderBrush="Gray">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                       Text="Конфигурация ПК"
+                           Margin="0 5"/>
+
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                               x:Name="NoItems"
+                               Visibility="{Binding ElementName=NoItems, Path=Text, Converter={StaticResource VisibilityConverter}}"
+                                Text="{Binding ComputerConfigs, Converter={StaticResource HasItemsConverter}}"
+                                Margin="0 5"/>
+
+                        <ListBox Style="{StaticResource ListBoxSideMenuStyle}"
+                                 x:Name="ConfigsList"
+                     ItemContainerStyle="{StaticResource ListBoxSideMenuItemStyle}"
+                     ItemsSource="{Binding ComputerConfigs}"
+                     Background="Transparent"
+                     HorizontalContentAlignment="Stretch"
+                     Margin="0 20">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <local:UseConfigItemControl/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Style="{StaticResource ButtonMainStyle}"
+                                Command="{Binding UseConfigCommand}"
+                                CommandParameter="{Binding ElementName=ConfigsList, Path=SelectedItem}"
+                                Click="Button_Click_1"
+                                Content="Использовать"
+                                    Margin="0 0 5 0"
+                                Foreground="White"
+                                Background="{StaticResource button-sidemenu-background}"
+                                HorizontalAlignment="Stretch"/>
+
+                        <Button Style="{StaticResource ButtonMainStyle}"
+                                    Click="Button_Click"
+                                Content="Отмена"
+                                    Grid.Column="1"
+                                    Margin="5 0 0 0"
+                                Foreground="White"
+                                Background="{StaticResource button-sidemenu-background}"
+                                HorizontalAlignment="Stretch"/>
+                    </Grid>
+
+                </Grid>
+            </Border>
+
+            <Border Background="{StaticResource gray-d9}"
+                    x:Name="SoftPopup"
+                    Visibility="Collapsed"
+                    Grid.RowSpan="2"
+                    Grid.ColumnSpan="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="450"
+                    Height="600"
+                    Padding="10 5"
+                    CornerRadius="15"
+                    BorderThickness="5"
+                    BorderBrush="Gray">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                       Text="Список приложений"
+                           Margin="0 5"/>
+
+                    <ListBox Style="{StaticResource ListBoxSideMenuStyle}"
+                             Grid.Row="1"
+                             ItemContainerStyle="{StaticResource ListBoxSoftItemStyle}"
+                             ItemsSource="{Binding ElementName=ComputersList, Path=SelectedItem.Softs, Converter={StaticResource SoftsConverter}}"
+                             Background="Transparent"
+                             HorizontalContentAlignment="Stretch"
+                             HorizontalAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                                       Padding="0"
+                                       FontSize="15"
+                                       Text="{Binding SoftName}"
+                                       Foreground="Black"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <Button Style="{StaticResource ButtonMainStyle}"
+                            Click="Button_Click_2"
+                            Content="Закрыть"
+                            Grid.Row="2"
+                            Margin="0 0 5 0"
+                            Foreground="White"
+                            Background="{StaticResource button-sidemenu-background}"
+                            HorizontalAlignment="Stretch"/>
+
+                </Grid>
+            </Border>
+        </Grid>
     </Border>
 </UserControl>

@@ -27,7 +27,7 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
@@ -40,6 +40,7 @@
             <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                        Text="{Binding Title}"
                        TextTrimming="CharacterEllipsis"
+                       TextWrapping="NoWrap"
                        Grid.Column="1"
                        HorizontalAlignment="Left"
                        Foreground="{StaticResource textblock-sidemenu-foreground}"/>

@@ -242,6 +242,7 @@
                                    x:Name="Placeholder"
                                    FontFamily="{TemplateBinding FontFamily}"
                                    Padding="{TemplateBinding Padding}"
+                                       FontSize="16"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                    Foreground="#5c5c5c">

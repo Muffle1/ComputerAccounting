@@ -12,6 +12,10 @@
             <DataTemplate DataType="{x:Type local:ComputerConfigViewModel}">
                 <local:ComputerConfigControl/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type local:LaboratoryInfoViewModel}">
+                <local:LaboratoryInfoControl/>
+            </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
     

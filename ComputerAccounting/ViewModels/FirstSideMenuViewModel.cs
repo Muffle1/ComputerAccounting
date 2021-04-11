@@ -41,7 +41,11 @@ namespace ComputerAccounting
                 return _addCabinetCommand ??= new RelayCommand(async o =>
                 {
                     if (await CheckCabinetAsync())
+                    {
+                        using DataBaseHelper db = new DataBaseHelper();
                         Cabinet = new Cabinet();
+                        Cabinets = db.Cabinets.ToList().OrderBy(c => c.GetCabinetNumber()).ToList();
+                    }
                 });
             }
         }
@@ -79,35 +83,37 @@ namespace ComputerAccounting
 
         private void FirstSideMenuViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(SelectedCabinet))
+            if ((SelectedCabinet != null) && (e.PropertyName == nameof(SelectedCabinet)))
             {
-                // TODO: Смена окна кабинета
+                CabinetViewModel cabinetViewModel = new CabinetViewModel(SelectedCabinet);
+                OnViewSwitched(cabinetViewModel, NameView.Page);
+                cabinetViewModel.UpdateCabinet += CabinetViewModel_UpdateCabinet;
             }
         }
 
+        private void CabinetViewModel_UpdateCabinet() =>
+            LoadCabinetsAsync();
+
         private async Task<bool> CheckCabinetAsync()
         {
-            Cabinet.ClearErrors();
-
-            if (Cabinet.Title == null)
-                Cabinet.AddError(nameof(Cabinet.Title), "Введите название.");
-            else if (!Cabinet.ContainsNumber())
-                Cabinet.AddError(nameof(Cabinet.Title), "Название должно оканчиваться на число.");
-            else if (Cabinets.Any(c => c.GetCabinetNumber() == Cabinet.GetCabinetNumber()))
-                Cabinet.AddError(nameof(Cabinet.Title), "Кабинет с таким номером уже есть.");
-            if (Cabinet.HasErrors) return false;
-
             return await Task.Run(() =>
             {
+                Cabinet.ClearErrors();
+
+                if (string.IsNullOrEmpty(Cabinet.Title))
+                    Cabinet.AddError(nameof(Cabinet.Title), "Введите название.");
+                else if (!Cabinet.ContainsNumber())
+                    Cabinet.AddError(nameof(Cabinet.Title), "Название должно оканчиваться на число.");
+                else if (Cabinets.Any(c => c.GetCabinetNumber() == Cabinet.GetCabinetNumber()))
+                    Cabinet.AddError(nameof(Cabinet.Title), "Кабинет с таким номером уже есть.");
+
+                if (Cabinet.HasErrors) return false;
+
                 using DataBaseHelper db = new DataBaseHelper();
                 if (!db.Cabinets.Any(c => c.Title == Cabinet.Title))
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        db.Cabinets.Add(Cabinet);
-                        db.SaveChanges();
-                        Cabinets = db.Cabinets.ToList().OrderBy(c => c.GetCabinetNumber()).ToList();
-                    });
+                    db.Cabinets.Add(Cabinet);
+                    db.SaveChanges();
 
                     return true;
                 }

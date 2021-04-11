@@ -37,7 +37,8 @@ namespace ComputerAccounting
         public MainManagerViewModel()
         {
             NameSideMenu = NameSideMenu.FirstMenu;
-            LoadView(new FirstSideMenuViewModel(), NameView.Control);
+            FirstSideMenuViewModel firstSideMenuViewModel = new FirstSideMenuViewModel();
+            LoadView(firstSideMenuViewModel, NameView.Control);
         }
 
         public void LoadView(IViewSwitcher viewModel, NameView nameView)
@@ -66,6 +67,8 @@ namespace ComputerAccounting
             {
                 return _switchControlCommand ??= new RelayCommand(o =>
                 {
+                    CurrentPage = null;
+
                     if ((NameSideMenu)Enum.Parse(typeof(NameSideMenu), o.ToString()) == NameSideMenu.FirstMenu)
                     {
                         NameSideMenu = NameSideMenu.FirstMenu;
