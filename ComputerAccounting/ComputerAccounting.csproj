@@ -9,7 +9,22 @@
   <ItemGroup>
     <None Remove="Images\BackgroundAuth.jpg" />
     <None Remove="Images\WindowIcon.png" />
+    <None Remove="LaboratoryDocumentTemplate.docx" />
+    <None Remove="LaboratoryDocumentTemplate.dot" />
+    <None Remove="LaboratoryDocumentTemplate.dotx" />
     <None Remove="WindowIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>7</VersionMinor>
+      <VersionMajor>8</VersionMajor>
+      <Guid>00020905-0000-0000-c000-000000000046</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +32,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\WindowIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LaboratoryDocumentTemplate.dotx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
