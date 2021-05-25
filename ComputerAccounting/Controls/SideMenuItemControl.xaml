@@ -14,6 +14,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/MainDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <local:RoleToVisibilityConverter x:Key="RoleToVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -46,6 +48,7 @@
                        Foreground="{StaticResource textblock-sidemenu-foreground}"/>
             
             <Button Style="{StaticResource ButtonDeleteStyle}"
+                    Visibility="{Binding Source={x:Static local:MainWindowViewModel.CurrentUser}, Path=Role, Converter={StaticResource RoleToVisibilityConverter}}"
                     Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}, Path=DataContext.DeleteCabinetCommand}"
                     CommandParameter="{Binding CabinetId}"
                     Content="&#xE711;"

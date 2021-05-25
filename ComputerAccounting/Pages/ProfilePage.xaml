@@ -23,12 +23,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <ContentControl Grid.Column="0" Content="{Binding ComputerConfigControl, UpdateSourceTrigger=PropertyChanged}"/>
         <ContentControl Grid.Column="1" Content="{Binding LaboratoryInfoControl, UpdateSourceTrigger=PropertyChanged}"/>
-        <ContentControl Grid.Column="2" Content="{Binding FullInfoControl, UpdateSourceTrigger=PropertyChanged}"/>
-        
+
     </Grid>
 </UserControl>

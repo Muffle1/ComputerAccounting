@@ -6,7 +6,7 @@ namespace ComputerAccounting
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        public static User CurrentUser { get; set; }
+        public static User CurrentUser;
 
         private IViewSwitcher _currentManager;
         public IViewSwitcher CurrentManager
@@ -17,7 +17,6 @@ namespace ComputerAccounting
 
         public MainWindowViewModel()
         {
-            //LoadManager(new MainManagerViewModel(new User()));
             LoadManager(new AuthenticationManagerViewModel());
         }
 

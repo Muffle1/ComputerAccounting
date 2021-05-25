@@ -19,12 +19,5 @@ namespace ComputerAccounting
             get => _laboratoryInfoControl;
             set => SetValue(ref _laboratoryInfoControl, value, nameof(LaboratoryInfoControl));
         }
-
-        private IViewSwitcher _fullInfoControl;
-        public IViewSwitcher FullInfoControl
-        {
-            get => _fullInfoControl;
-            set => SetValue(ref _fullInfoControl, value, nameof(FullInfoControl));
-        }
     }
 }
