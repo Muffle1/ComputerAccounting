@@ -33,7 +33,6 @@
 
             <Button Style="{StaticResource ButtonMainStyle}"
                         Command="{Binding CreateDocumentCommand}"
-                        CommandParameter="{Binding ElementName=SoftsList, Path=SelectedItem}"
                         Content="Сформировать документ"
                         Grid.Row="2"
                         Foreground="White"

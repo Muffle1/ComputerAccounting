@@ -80,11 +80,6 @@ namespace ComputerAccounting
             else if ((controlName == "LaboratoryInfoControl") && (ProfileViewModel.LaboratoryInfoControl != null))
                 ProfileViewModel.LaboratoryInfoControl = null;
 
-            if ((controlName == "FullInfoControl") && (ProfileViewModel.FullInfoControl == null))
-                ProfileViewModel.FullInfoControl = new ComputerConfigViewModel();
-            else if ((controlName == "FullInfoControl") && (ProfileViewModel.FullInfoControl != null))
-                ProfileViewModel.FullInfoControl = null;
-
             OnPropertyChanged(nameof(ProfileViewModel));
         }
 

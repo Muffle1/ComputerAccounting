@@ -27,7 +27,17 @@ namespace ComputerAccounting
             set => _password = Hash(value);
         }
 
-        public Role Role { get; set; } = Role.Engineer;
+        private Role _role;
+        public Role Role
+        {
+            get => _role;
+            set => SetValue(ref _role, value, nameof(Role));
+        }
+
+        public User()
+        {
+            Role = Role.Engineer;
+        }
 
         public User Clone()
         {

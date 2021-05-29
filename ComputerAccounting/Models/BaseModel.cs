@@ -40,6 +40,12 @@ namespace ComputerAccounting
             }
         }
 
+        public void SetValue<T>(ref T property, T value, string propertyName)
+        {
+            property = value;
+            OnPropertyChanged(propertyName);
+        }
+
         public void OnPropertyChanged([CallerMemberName] string prop = "") =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
 
