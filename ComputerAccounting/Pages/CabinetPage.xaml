@@ -300,9 +300,8 @@
                         <Binding ElementName="SoftPopup" Path="Visibility"/>
                     </MultiBinding>
                 </Grid.Visibility>
-            </Grid>
 
-            <Border Background="{StaticResource gray-d9}"
+                <Border Background="{StaticResource gray-d9}"
                     x:Name="ConfigPopup"
                     Visibility="Collapsed"
                     Grid.RowSpan="2"
@@ -314,48 +313,49 @@
                     Padding="10 5"
                     CornerRadius="15"
                     BorderThickness="5"
-                    BorderBrush="Gray">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
+                    BorderBrush="Gray"
+                        >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
 
-                    <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                        <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                        Text="Конфигурация ПК"
                            Margin="0 5"/>
 
-                    <StackPanel Grid.Row="1">
-                        <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                        <StackPanel Grid.Row="1">
+                            <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                                x:Name="NoItems"
                                Visibility="{Binding ElementName=NoItems, Path=Text, Converter={StaticResource VisibilityConverter}}"
                                 Text="{Binding ComputerConfigs, Converter={StaticResource HasItemsConverter}}"
                                 Margin="0 5"/>
 
-                        <ListBox Style="{StaticResource ListBoxSideMenuStyle}"
+                            <ListBox Style="{StaticResource ListBoxSideMenuStyle}"
                                  x:Name="ConfigsList"
                      ItemContainerStyle="{StaticResource ListBoxSideMenuItemStyle}"
                      ItemsSource="{Binding ComputerConfigs}"
                      Background="Transparent"
                      HorizontalContentAlignment="Stretch"
                      Margin="0 20">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <local:UseConfigItemControl/>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </StackPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <local:UseConfigItemControl/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
 
 
-                    <Grid Grid.Row="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
-                        <Button Style="{StaticResource ButtonMainStyle}"
+                            <Button Style="{StaticResource ButtonMainStyle}"
                                 Command="{Binding UseConfigCommand}"
                                 CommandParameter="{Binding ElementName=ConfigsList, Path=SelectedItem}"
                                 Click="Button_Click_1"
@@ -365,7 +365,7 @@
                                 Background="{StaticResource button-sidemenu-background}"
                                 HorizontalAlignment="Stretch"/>
 
-                        <Button Style="{StaticResource ButtonMainStyle}"
+                            <Button Style="{StaticResource ButtonMainStyle}"
                                     Click="Button_Click"
                                 Content="Отмена"
                                     Grid.Column="1"
@@ -373,12 +373,12 @@
                                 Foreground="White"
                                 Background="{StaticResource button-sidemenu-background}"
                                 HorizontalAlignment="Stretch"/>
+                        </Grid>
+
                     </Grid>
+                </Border>
 
-                </Grid>
-            </Border>
-
-            <Border Background="{StaticResource gray-d9}"
+                <Border Background="{StaticResource gray-d9}"
                     x:Name="SoftPopup"
                     Visibility="Collapsed"
                     Grid.RowSpan="2"
@@ -391,36 +391,36 @@
                     CornerRadius="15"
                     BorderThickness="5"
                     BorderBrush="Gray">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
 
-                    <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                        <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                        Text="Список приложений"
                            Margin="0 5"/>
 
-                    <ListBox Style="{StaticResource ListBoxSideMenuStyle}"
+                        <ListBox Style="{StaticResource ListBoxSideMenuStyle}"
                              Grid.Row="1"
                              ItemContainerStyle="{StaticResource ListBoxSoftItemStyle}"
                              ItemsSource="{Binding ElementName=ComputersList, Path=SelectedItem.Softs, Converter={StaticResource SoftsConverter}}"
                              Background="Transparent"
                              HorizontalContentAlignment="Stretch"
                              HorizontalAlignment="Stretch">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                                        Padding="0"
                                        FontSize="15"
                                        Text="{Binding SoftName}"
                                        Foreground="Black"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
 
-                    <Button Style="{StaticResource ButtonMainStyle}"
+                        <Button Style="{StaticResource ButtonMainStyle}"
                             Click="Button_Click_2"
                             Content="Закрыть"
                             Grid.Row="2"
@@ -429,8 +429,9 @@
                             Background="{StaticResource button-sidemenu-background}"
                             HorizontalAlignment="Stretch"/>
 
-                </Grid>
-            </Border>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>

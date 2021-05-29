@@ -30,7 +30,7 @@ namespace ComputerAccounting
             if (DataContext != null)
                 (DataContext as CabinetViewModel).OpenSoftsList += CabinetPage_OpenSoftsList;
         }
-
+        
         private void CabinetPage_OpenSoftsList(int computerId)
         {
             ComputersList.SelectedItem = ComputersList.Items.Cast<Computer>().SingleOrDefault(c => c.ComputerId == computerId);
@@ -50,11 +50,14 @@ namespace ComputerAccounting
 
         private void ConfigPopup_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (ConfigPopup.Visibility == Visibility.Visible)
-                ConfigPopup.Visibility = Visibility.Collapsed;
+            if (e.OriginalSource is Grid)
+            {
+                if (ConfigPopup.Visibility == Visibility.Visible)
+                    ConfigPopup.Visibility = Visibility.Collapsed;
 
-            if (SoftPopup.Visibility == Visibility.Visible)
-                SoftPopup.Visibility = Visibility.Collapsed;
+                if (SoftPopup.Visibility == Visibility.Visible)
+                    SoftPopup.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
