@@ -28,6 +28,7 @@
 
 
             <ListBox Style="{StaticResource ListBoxSideMenuStyle}"
+                     
                  ItemContainerStyle="{StaticResource ListBoxSideMenuItemStyle}"
                  Background="Transparent"
                  Grid.Row="0"

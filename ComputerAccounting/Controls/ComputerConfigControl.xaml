@@ -70,7 +70,7 @@
                              Text="{Binding ComputerConfig.RAMCapacity, UpdateSourceTrigger=PropertyChanged}"
                          MaxLength="30"
                          Margin="5 0 0 0"
-                         Tag="Объём ОЗУ (в Мб)"
+                         Tag="Объём ОЗУ (в ГБ)"
                          BorderBrush="{StaticResource textbox-main-borderbrush}"
                          HorizontalAlignment="Stretch"
                          HorizontalContentAlignment="Center"/>
@@ -96,7 +96,7 @@
                              Text="{Binding ComputerConfig.DiskCapacity}"
                          MaxLength="30"
                          Margin="5 0 0 0"
-                         Tag="Объём ЖД (в Мб)"
+                         Tag="Объём ЖД (в ГБ)"
                          BorderBrush="{StaticResource textbox-main-borderbrush}"
                          HorizontalContentAlignment="Center"/>
 

@@ -192,6 +192,7 @@ namespace ComputerAccounting
                 {
                     IsEditing = true;
                     Computer = Computers.SingleOrDefault(c => c.ComputerId == Convert.ToInt32(o));
+                    Softs.Clear();
                     foreach (var soft in ((string)Computer.Softs).Split(", "))
                         Softs.Add(new Soft() { SoftName = soft });
                 });

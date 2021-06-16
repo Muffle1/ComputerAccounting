@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -12,6 +13,9 @@ namespace ComputerAccounting
 {
     public class FirstSideMenuViewModel : BaseViewModel
     {
+        public static CancellationTokenSource _cancellationTokenSource;
+        private CancellationToken Token;
+
         private Cabinet _cabinet;
         public Cabinet Cabinet
         {
@@ -26,8 +30,8 @@ namespace ComputerAccounting
             set => SetValue(ref _selectedCabinet, value, nameof(SelectedCabinet));
         }
 
-        private List<Cabinet> _cabinets;
-        public List<Cabinet> Cabinets
+        private ObservableCollection<Cabinet> _cabinets;
+        public ObservableCollection<Cabinet> Cabinets
         {
             get => _cabinets;
             set => SetValue(ref _cabinets, value, nameof(Cabinets));
@@ -43,8 +47,26 @@ namespace ComputerAccounting
                     if (await CheckCabinetAsync())
                     {
                         using DataBaseHelper db = new DataBaseHelper();
+
+                        if (Cabinets.First().GetCabinetNumber() > Cabinet.GetCabinetNumber())
+                            Cabinets.Insert(0, Cabinet);
+                        else if (Cabinets.First().GetCabinetNumber() < Cabinet.GetCabinetNumber())
+                        {
+                            int i = 0;
+                            foreach (var cabinet in Cabinets)
+                            {
+                                if (cabinet.GetCabinetNumber() < Cabinet.GetCabinetNumber())
+                                    i++;
+                                else
+                                {
+                                    Cabinets.Insert(i, Cabinet);
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                            Cabinets.Add(Cabinet);
                         Cabinet = new Cabinet();
-                        Cabinets = db.Cabinets.ToList().OrderBy(c => c.GetCabinetNumber()).ToList();
                     }
                 });
             }
@@ -58,9 +80,10 @@ namespace ComputerAccounting
                 return _deleteCabinetCommand ??= new RelayCommand(o =>
                 {
                     using DataBaseHelper db = new DataBaseHelper();
-                    db.Remove(db.Cabinets.Single(x => x.CabinetId == Convert.ToInt32(o)));
+                    Cabinet cabinet = db.Cabinets.Include(c => c.Computers).Single(c => c.CabinetId == Convert.ToInt32(o));
+                    db.Remove(cabinet);
                     db.SaveChanges();
-                    Cabinets = db.Cabinets.ToList().OrderBy(c => c.GetCabinetNumber()).ToList();
+                    Cabinets.Remove(Cabinets.SingleOrDefault(c => c.CabinetId == Convert.ToInt32(o)));
                 });
             }
         }
@@ -68,6 +91,9 @@ namespace ComputerAccounting
         public FirstSideMenuViewModel()
         {
             Cabinet = new Cabinet();
+            Cabinets = new ObservableCollection<Cabinet>();
+            _cancellationTokenSource = new CancellationTokenSource();
+            Token = _cancellationTokenSource.Token;
             LoadCabinetsAsync();
             PropertyChanged += FirstSideMenuViewModel_PropertyChanged;
         }
@@ -77,7 +103,22 @@ namespace ComputerAccounting
             await Task.Run(() =>
             {
                 using DataBaseHelper db = new DataBaseHelper();
-                Cabinets = db.Cabinets.ToList().OrderBy(c => c.GetCabinetNumber()).ToList();
+
+                int i = 0, cabinetsCount = db.Cabinets.Count();
+                while (true)
+                {
+                    if (Token.IsCancellationRequested)
+                        break;
+
+                    Cabinet[] cabinets = db.Cabinets.ToList().OrderBy(c => c.GetCabinetNumber()).Skip(i).Take(5).ToArray();
+                    foreach (var cabinet in cabinets)
+                        Application.Current?.Dispatcher.Invoke(() => Cabinets.Add(cabinet));
+
+                    i += 5;
+
+                    if (i > cabinetsCount)
+                        break;
+                }
             });
         }
 

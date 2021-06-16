@@ -36,8 +36,8 @@ namespace ComputerAccounting
 
         public SecondSideMenuViewModel()
         {
-            User = MainWindowViewModel.CurrentUser;
-            Login = User.Login;
+            User = MainWindowViewModel.CurrentUser.Clone();
+            Login = MainWindowViewModel.CurrentUser.Login;
             User.Login = "";
         }
 
@@ -94,15 +94,17 @@ namespace ComputerAccounting
 
                 if (user != null)
                 {
-                    if ((user.Login != User.Login) && (!string.IsNullOrEmpty(User.Login)))
+                    if ((!db.Users.Any(u => u.Login == User.Login)) && (user.Login != User.Login) && (!string.IsNullOrEmpty(User.Login)))
                     {
                         if (User.Login.Length <= 5)
                             User.AddError(nameof(User.Login), "Логин должен быть больше 6 символов.");
                         else
-                            user.Login = Login = User.Login;
+                            user.Login = Login = MainWindowViewModel.CurrentUser.Login = User.Login;
                     }
                     else if ((user.Login == User.Login) && (!string.IsNullOrEmpty(User.Login)))
-                        User.AddError(nameof(User.Login), "Логин не должен совпадать с предыдущим паролем.");
+                        User.AddError(nameof(User.Login), "Логин не должен совпадать с предыдущим логином.");
+                    else if (db.Users.Any(u => u.Login == User.Login))
+                        User.AddError(nameof(User.Login), "Пользователь с таким логином уже есть.");
 
                     if ((user.Password != User.Password) && (!string.IsNullOrEmpty(User.Password)))
                     {
@@ -115,12 +117,12 @@ namespace ComputerAccounting
                         User.AddError(nameof(User.Password), "Пароль не должен совпадать с предыдущим паролем.");
 
                     if (user.Role != User.Role)
-                        user.Role = User.Role;
+                        user.Role = MainWindowViewModel.CurrentUser.Role = User.Role;
 
                     if (User.HasErrors) return false;
 
                     User = new User() { UserId = User.UserId, Role = User.Role };
-
+                    OnPropertyChanged(nameof(User.Login));
                     db.SaveChanges();
 
                     return true;

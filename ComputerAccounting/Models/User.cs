@@ -31,7 +31,7 @@ namespace ComputerAccounting
         public Role Role
         {
             get => _role;
-            set => SetValue(ref _role, value, nameof(Role));
+            set => _role = value;
         }
 
         public User()

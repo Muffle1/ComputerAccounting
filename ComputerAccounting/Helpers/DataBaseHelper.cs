@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,9 +19,15 @@ namespace ComputerAccounting
             Database.EnsureCreated();
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Computer>().HasOne(c => c.Cabinet).WithMany(c => c.Computers).OnDelete(DeleteBehavior.ClientCascade);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=CADataBase.db");
+            string databasePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Computer Accounting\\CADataBase.db";
+            optionsBuilder.UseSqlite($"Data Source={databasePath}");
         }
     }
 }

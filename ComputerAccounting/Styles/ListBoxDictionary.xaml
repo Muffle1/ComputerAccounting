@@ -4,6 +4,7 @@
 
     <Style x:Key="ListBoxSideMenuStyle" TargetType="{x:Type ListBox}">
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
         
         <Setter Property="Template">
             <Setter.Value>

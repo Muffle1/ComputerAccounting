@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
 using System.Windows;
 
 namespace ComputerAccounting
@@ -11,6 +13,9 @@ namespace ComputerAccounting
         public App()
         {
             InitializeComponent();
+
+            if (!Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Computer Accounting"))
+                Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Computer Accounting");
 
             using var db = new DataBaseHelper();
             db.Database.Migrate();

@@ -145,7 +145,7 @@
 
                             <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                                    FontSize="15"
-                           Text="Объем (В Мб)"
+                           Text="Объем (В ГБ)"
                            Foreground="{StaticResource textblock-sidemenu-foreground}"/>
                             <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                                            TextAlignment="Left"
@@ -191,7 +191,7 @@
 
                             <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                                    FontSize="15"
-                           Text="Объем (В Мб)"
+                           Text="Объем (В ГБ)"
                            Foreground="{StaticResource textblock-sidemenu-foreground}"/>
                             <TextBlock Style="{StaticResource TextBlockSideMenuStyle}"
                                            TextAlignment="Left"

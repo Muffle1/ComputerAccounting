@@ -69,14 +69,15 @@ namespace ComputerAccounting
                 {
                     CurrentPage = null;
 
-                    if ((NameSideMenu)Enum.Parse(typeof(NameSideMenu), o.ToString()) == NameSideMenu.FirstMenu)
+                    if ((NameSideMenu != NameSideMenu.FirstMenu) && ((NameSideMenu)Enum.Parse(typeof(NameSideMenu), o.ToString()) == NameSideMenu.FirstMenu))
                     {
                         NameSideMenu = NameSideMenu.FirstMenu;
                         LoadView(new FirstSideMenuViewModel(), NameView.Control);
                     }
 
-                    if ((NameSideMenu)Enum.Parse(typeof(NameSideMenu), o.ToString()) == NameSideMenu.SecondMenu)
+                    if ((NameSideMenu != NameSideMenu.SecondMenu) && ((NameSideMenu)Enum.Parse(typeof(NameSideMenu), o.ToString()) == NameSideMenu.SecondMenu))
                     {
+                        FirstSideMenuViewModel._cancellationTokenSource.Cancel();
                         NameSideMenu = NameSideMenu.SecondMenu;
                         LoadView(new SecondSideMenuViewModel(), NameView.Control);
                     }
