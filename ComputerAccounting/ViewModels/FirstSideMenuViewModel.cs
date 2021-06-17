@@ -13,7 +13,7 @@ namespace ComputerAccounting
 {
     public class FirstSideMenuViewModel : BaseViewModel
     {
-        public static CancellationTokenSource _cancellationTokenSource;
+        public static CancellationTokenSource CancellationTokenSource;
         private CancellationToken Token;
 
         private Cabinet _cabinet;
@@ -92,8 +92,8 @@ namespace ComputerAccounting
         {
             Cabinet = new Cabinet();
             Cabinets = new ObservableCollection<Cabinet>();
-            _cancellationTokenSource = new CancellationTokenSource();
-            Token = _cancellationTokenSource.Token;
+            CancellationTokenSource = new CancellationTokenSource();
+            Token = CancellationTokenSource.Token;
             LoadCabinetsAsync();
             PropertyChanged += FirstSideMenuViewModel_PropertyChanged;
         }
@@ -112,7 +112,11 @@ namespace ComputerAccounting
 
                     Cabinet[] cabinets = db.Cabinets.ToList().OrderBy(c => c.GetCabinetNumber()).Skip(i).Take(5).ToArray();
                     foreach (var cabinet in cabinets)
+                    {
+                        if (Token.IsCancellationRequested)
+                            break;
                         Application.Current?.Dispatcher.Invoke(() => Cabinets.Add(cabinet));
+                    }
 
                     i += 5;
 

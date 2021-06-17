@@ -77,7 +77,7 @@ namespace ComputerAccounting
 
                     if ((NameSideMenu != NameSideMenu.SecondMenu) && ((NameSideMenu)Enum.Parse(typeof(NameSideMenu), o.ToString()) == NameSideMenu.SecondMenu))
                     {
-                        FirstSideMenuViewModel._cancellationTokenSource.Cancel();
+                        FirstSideMenuViewModel.CancellationTokenSource.Cancel();
                         NameSideMenu = NameSideMenu.SecondMenu;
                         LoadView(new SecondSideMenuViewModel(), NameView.Control);
                     }
