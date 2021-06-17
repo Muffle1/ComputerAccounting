@@ -146,11 +146,10 @@ namespace ComputerAccounting
                             db.Computers.Update(Computer);
                             IsEditing = false;
                         }
+                        db.SaveChanges();
 
                         Computer = new Computer();
                         Softs = new ObservableCollection<Soft>();
-
-                        db.SaveChanges();
                         Computers = db.Computers.Where(c => c.Cabinet == Cabinet).ToList();
                     }
                 });

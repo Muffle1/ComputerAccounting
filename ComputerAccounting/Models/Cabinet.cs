@@ -16,8 +16,11 @@ namespace ComputerAccounting
         public int GetCabinetNumber() =>
             Convert.ToInt32(string.Join("", Title.Where(ch => char.IsDigit(ch))));
 
-        public bool ContainsNumber() =>
-            new Regex(@"^\D*\s?\d+$", RegexOptions.IgnoreCase).IsMatch(Title);
+        public bool ContainsNumber()
+        {
+            var test = new Regex(@"^\D*\s?\d+$", RegexOptions.IgnoreCase).IsMatch(Title);
+            return test;
+        }
 
         public override string ToString() =>
             Title;

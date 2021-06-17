@@ -57,7 +57,7 @@ namespace ComputerAccounting
             return await Task.Run(() =>
             {
                 using DataBaseHelper db = new DataBaseHelper();
-                if (db.Users.Any(u => (u.Login == User.Login) && (u.Password == User.Password)))
+                if (!db.Users.Any(u => (u.Login == User.Login) && (u.Password == User.Password)))
                 {
                     User user = db.Users.Single(u => (u.Login == User.Login) && (u.Password == User.Password));
                     User = user.Clone();
